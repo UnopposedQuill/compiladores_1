@@ -4,7 +4,6 @@
  */
 
 package GUI;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseListener;
@@ -29,11 +28,12 @@ public class FileFrame extends javax.swing.JInternalFrame {
   // <editor-fold defaultstate="collapsed" desc=" Methods ">
 
   /**
-   * Creates a new instance of FileFrame.
-   * @param delegateKey Event to fire when a key is pressed in the editor window.
-   * @param delegateFrame Event to fire when the frame is closed or focused.
-   * @param delegateEnter Event to fire when the "Enter Input" button is pressed.
-   */
+	* Creates a new instance of FileFrame.
+	* @param delegateKey Event to fire when a key is pressed in the editor window.
+	* @param delegateMouse
+	* @param delegateFrame Event to fire when the frame is closed or focused.
+	* @param delegateEnter Event to fire when the "Enter Input" button is pressed.
+	*/
   public FileFrame(KeyAdapter delegateKey, MouseListener delegateMouse, InternalFrameListener delegateFrame, ActionListener delegateEnter) {
       initComponents();
       previouslySaved = false;        
@@ -169,6 +169,22 @@ public class FileFrame extends javax.swing.JInternalFrame {
   public void clearConsole() {
       consolePane.setText("");
   }
+  
+  //@TODO: Implement
+  /**
+   * Clears de Debug Text and resets the stack visualization
+   */
+  public void clearDebug(){
+	  debugTAMPane.setText("");
+  }
+  
+  public void writeTAMDebug(String text){
+	  debugTAMPane.setText(debugTAMPane.getText() + text);
+  }
+  
+  public void writeToDebug(String text){
+	  
+  }
 
   /**
    * Writes in the Console text box.
@@ -198,6 +214,13 @@ public class FileFrame extends javax.swing.JInternalFrame {
    */
   public void selectConsole() {
       tabbedPane.setSelectedComponent(consolePanel);
+  }
+  
+  /**
+   * Sets the focus on the Debugging Panel
+   */
+  public void selectDebugging() {
+	  tabbedPane.setSelectedComponent(debugPanel);
   }
 
   /**
@@ -286,124 +309,177 @@ public class FileFrame extends javax.swing.JInternalFrame {
   }
   // </editor-fold>
 
-  // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-  private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-    tabbedPane = new javax.swing.JTabbedPane();
-    sourcePanel = new javax.swing.JPanel();
-    sourceScroll = new javax.swing.JScrollPane();
-    sourcePane = new javax.swing.JEditorPane();
-    rowPane = new javax.swing.JTextPane();
-    consolePanel = new javax.swing.JPanel();
-    consoleScroll = new javax.swing.JScrollPane();
-    consolePane = new javax.swing.JEditorPane();
-    inputPanel = new javax.swing.JPanel();
-    inputField = new javax.swing.JTextField();
-    enterButton = new javax.swing.JButton();
-    astScroll = new javax.swing.JScrollPane();
-    tamScroll = new javax.swing.JScrollPane();
-    tamPane = new javax.swing.JEditorPane();
-    tableScroll = new javax.swing.JScrollPane();
+        tabbedPane = new javax.swing.JTabbedPane();
+        sourcePanel = new javax.swing.JPanel();
+        sourceScroll = new javax.swing.JScrollPane();
+        sourcePane = new javax.swing.JEditorPane();
+        rowPane = new javax.swing.JTextPane();
+        consolePanel = new javax.swing.JPanel();
+        consoleScroll = new javax.swing.JScrollPane();
+        consolePane = new javax.swing.JEditorPane();
+        inputPanel = new javax.swing.JPanel();
+        inputField = new javax.swing.JTextField();
+        enterButton = new javax.swing.JButton();
+        debugPanel = new javax.swing.JPanel();
+        debugControlsPanel = new javax.swing.JPanel();
+        buttonStopDebugging = new javax.swing.JButton();
+        buttonContinueRun = new javax.swing.JButton();
+        buttonNextInstruction = new javax.swing.JButton();
+        debugInformationPanel = new javax.swing.JPanel();
+        splitPane = new javax.swing.JSplitPane();
+        debugTAMScroll = new javax.swing.JScrollPane();
+        debugTAMPane = new javax.swing.JEditorPane();
+        interpreterScroll = new javax.swing.JScrollPane();
+        interpreterPane = new javax.swing.JEditorPane();
+        astScroll = new javax.swing.JScrollPane();
+        tamScroll = new javax.swing.JScrollPane();
+        tamPane = new javax.swing.JEditorPane();
+        tableScroll = new javax.swing.JScrollPane();
 
-    setClosable(true);
-    setIconifiable(true);
-    setMaximizable(true);
-    setResizable(true);
-    setDoubleBuffered(true);
-    setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFrame.gif"))); // NOI18N
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setDoubleBuffered(true);
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFrame.gif"))); // NOI18N
 
-    sourcePanel.setLayout(new javax.swing.BoxLayout(sourcePanel, javax.swing.BoxLayout.Y_AXIS));
+        sourcePanel.setLayout(new javax.swing.BoxLayout(sourcePanel, javax.swing.BoxLayout.Y_AXIS));
 
-    sourceScroll.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    sourceScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    sourceScroll.setName("sourceScroll"); // NOI18N
+        sourceScroll.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sourceScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        sourceScroll.setName("sourceScroll"); // NOI18N
 
-    sourcePane.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
-    Document d = sourcePane.getDocument();
-    if (d instanceof PlainDocument){
-      d.putProperty(PlainDocument.tabSizeAttribute, 4);
-    }
-    sourceScroll.setViewportView(sourcePane);
+        sourcePane.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        Document d = sourcePane.getDocument();
+        if (d instanceof PlainDocument){
+            d.putProperty(PlainDocument.tabSizeAttribute, 4);
+        }
+        sourceScroll.setViewportView(sourcePane);
 
-    sourcePanel.add(sourceScroll);
+        sourcePanel.add(sourceScroll);
 
-    rowPane.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    rowPane.setEditable(false);
-    rowPane.setFocusable(false);
-    rowPane.setMaximumSize(new java.awt.Dimension(2147483647, 20));
-    sourcePanel.add(rowPane);
+        rowPane.setEditable(false);
+        rowPane.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        rowPane.setFocusable(false);
+        rowPane.setMaximumSize(new java.awt.Dimension(2147483647, 20));
+        sourcePanel.add(rowPane);
 
-    tabbedPane.addTab("Source Code", sourcePanel);
+        tabbedPane.addTab("Source Code", sourcePanel);
 
-    consolePanel.setName("consolePanel"); // NOI18N
-    consolePanel.setLayout(new javax.swing.BoxLayout(consolePanel, javax.swing.BoxLayout.Y_AXIS));
+        consolePanel.setName("consolePanel"); // NOI18N
+        consolePanel.setLayout(new javax.swing.BoxLayout(consolePanel, javax.swing.BoxLayout.Y_AXIS));
 
-    consoleScroll.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    consoleScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        consoleScroll.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        consoleScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    consolePane.setEditable(false);
-    consolePane.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-    consoleScroll.setViewportView(consolePane);
+        consolePane.setEditable(false);
+        consolePane.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        consoleScroll.setViewportView(consolePane);
 
-    consolePanel.add(consoleScroll);
+        consolePanel.add(consoleScroll);
 
-    inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    inputPanel.setLayout(new javax.swing.BoxLayout(inputPanel, javax.swing.BoxLayout.LINE_AXIS));
+        inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        inputPanel.setLayout(new javax.swing.BoxLayout(inputPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-    inputField.setEnabled(false);
-    inputField.setMaximumSize(new java.awt.Dimension(2147483647, 20));
-    inputField.setMinimumSize(new java.awt.Dimension(11, 20));
-    inputField.setPreferredSize(new java.awt.Dimension(23, 20));
-    inputPanel.add(inputField);
+        inputField.setEnabled(false);
+        inputField.setMaximumSize(new java.awt.Dimension(2147483647, 20));
+        inputField.setMinimumSize(new java.awt.Dimension(11, 20));
+        inputField.setPreferredSize(new java.awt.Dimension(23, 20));
+        inputPanel.add(inputField);
 
-    enterButton.setText("Enter Input");
-    enterButton.setEnabled(false);
-    inputPanel.add(enterButton);
+        enterButton.setText("Enter Input");
+        enterButton.setEnabled(false);
+        inputPanel.add(enterButton);
 
-    consolePanel.add(inputPanel);
+        consolePanel.add(inputPanel);
 
-    tabbedPane.addTab("Console", consolePanel);
+        tabbedPane.addTab("Console", consolePanel);
 
-    astScroll.setBorder(null);
-    tabbedPane.addTab("Abstract Syntax Trees", astScroll);
+        debugPanel.setLayout(new java.awt.BorderLayout());
 
-    tamScroll.setBorder(null);
-    tamScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    tamScroll.setName("tamScroll"); // NOI18N
+        buttonStopDebugging.setText("Stop");
+        debugControlsPanel.add(buttonStopDebugging);
 
-    tamPane.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    tamPane.setEditable(false);
-    tamPane.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-    tamScroll.setViewportView(tamPane);
+        buttonContinueRun.setText("Continue Run");
+        debugControlsPanel.add(buttonContinueRun);
 
-    tabbedPane.addTab("TAM Code", tamScroll);
+        buttonNextInstruction.setText("Next Instruction");
+        debugControlsPanel.add(buttonNextInstruction);
 
-    tableScroll.setBorder(null);
-    tabbedPane.addTab("Table Details", tableScroll);
+        debugPanel.add(debugControlsPanel, java.awt.BorderLayout.PAGE_START);
 
-    getContentPane().add(tabbedPane, java.awt.BorderLayout.CENTER);
+        debugInformationPanel.setLayout(new javax.swing.BoxLayout(debugInformationPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-    pack();
-  }// </editor-fold>//GEN-END:initComponents
+        debugTAMPane.setEditable(false);
+        debugTAMScroll.setViewportView(debugTAMPane);
+
+        splitPane.setLeftComponent(debugTAMScroll);
+
+        interpreterPane.setEditable(false);
+        interpreterScroll.setViewportView(interpreterPane);
+
+        splitPane.setRightComponent(interpreterScroll);
+
+        debugInformationPanel.add(splitPane);
+
+        debugPanel.add(debugInformationPanel, java.awt.BorderLayout.CENTER);
+
+        tabbedPane.addTab("Debug", debugPanel);
+
+        astScroll.setBorder(null);
+        tabbedPane.addTab("Abstract Syntax Trees", astScroll);
+
+        tamScroll.setBorder(null);
+        tamScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        tamScroll.setName("tamScroll"); // NOI18N
+
+        tamPane.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tamPane.setEditable(false);
+        tamPane.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        tamScroll.setViewportView(tamPane);
+
+        tabbedPane.addTab("TAM Code", tamScroll);
+
+        tableScroll.setBorder(null);
+        tabbedPane.addTab("Table Details", tableScroll);
+
+        getContentPane().add(tabbedPane, java.awt.BorderLayout.CENTER);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
       
   // <editor-fold defaultstate="collapsed" desc=" GUI Variables ">
-  // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JScrollPane astScroll;
-  private javax.swing.JEditorPane consolePane;
-  private javax.swing.JPanel consolePanel;
-  private javax.swing.JScrollPane consoleScroll;
-  private javax.swing.JButton enterButton;
-  private javax.swing.JTextField inputField;
-  private javax.swing.JPanel inputPanel;
-  private javax.swing.JTextPane rowPane;
-  private javax.swing.JEditorPane sourcePane;
-  private javax.swing.JPanel sourcePanel;
-  private javax.swing.JScrollPane sourceScroll;
-  private javax.swing.JTabbedPane tabbedPane;
-  private javax.swing.JScrollPane tableScroll;
-  private javax.swing.JEditorPane tamPane;
-  private javax.swing.JScrollPane tamScroll;
-  // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane astScroll;
+    private javax.swing.JButton buttonContinueRun;
+    private javax.swing.JButton buttonNextInstruction;
+    private javax.swing.JButton buttonStopDebugging;
+    private javax.swing.JEditorPane consolePane;
+    private javax.swing.JPanel consolePanel;
+    private javax.swing.JScrollPane consoleScroll;
+    private javax.swing.JPanel debugControlsPanel;
+    private javax.swing.JPanel debugInformationPanel;
+    private javax.swing.JPanel debugPanel;
+    private javax.swing.JEditorPane debugTAMPane;
+    private javax.swing.JScrollPane debugTAMScroll;
+    private javax.swing.JButton enterButton;
+    private javax.swing.JTextField inputField;
+    private javax.swing.JPanel inputPanel;
+    private javax.swing.JEditorPane interpreterPane;
+    private javax.swing.JScrollPane interpreterScroll;
+    private javax.swing.JTextPane rowPane;
+    private javax.swing.JEditorPane sourcePane;
+    private javax.swing.JPanel sourcePanel;
+    private javax.swing.JScrollPane sourceScroll;
+    private javax.swing.JSplitPane splitPane;
+    private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JScrollPane tableScroll;
+    private javax.swing.JEditorPane tamPane;
+    private javax.swing.JScrollPane tamScroll;
+    // End of variables declaration//GEN-END:variables
   private JTree astTree;
   private JTable idTable;
   // </editor-fold>

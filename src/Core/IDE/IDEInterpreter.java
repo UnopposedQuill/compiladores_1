@@ -28,12 +28,10 @@ public class IDEInterpreter {
      * @param fileName Path to the TAM Object File.
      */       
     public synchronized void Run(final String fileName) {
-        new Thread(new Runnable() {
-            public void run() {
-                TAM.Interpreter.main(new String[] {fileName});
-                delegate.actionPerformed(null);
-            }
-        }).start();
+        new Thread(() -> {
+			TAM.Interpreter.main(new String[] {fileName});
+			delegate.actionPerformed(null);
+		}).start();
     }      
     // </editor-fold>
     

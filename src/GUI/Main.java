@@ -34,6 +34,10 @@ import Core.ExampleFileFilter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import Core.Visitors.TreeVisitor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -51,7 +55,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {        
         try {
             UIManager.setLookAndFeel(UIManager.getLookAndFeel());
-        } catch (Exception e) { }
+        } catch (UnsupportedLookAndFeelException e) { }
         
         initComponents();
         setSize(640, 480);
@@ -147,20 +151,19 @@ public class Main extends javax.swing.JFrame {
 
     /**
      * Main method, instantiates the Main class.
+	 * @param args Arguments for the instance
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main();
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> {
+			new Main().setVisible(true);
+		});
     }
     // </editor-fold>
     
     @SuppressWarnings("deprecation")
-    // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        this.setBackground(Color.DARK_GRAY);
+
         toolBarsPanel = new javax.swing.JPanel();
         fileToolBar = new javax.swing.JToolBar();
         buttonNew = new javax.swing.JButton();
@@ -173,6 +176,7 @@ public class Main extends javax.swing.JFrame {
         triangleToolBar = new javax.swing.JToolBar();
         buttonCompile = new javax.swing.JButton();
         buttonRun = new javax.swing.JButton();
+        buttonDebug = new javax.swing.JButton();
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -194,23 +198,24 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IDE-Triangle 1.1");
-        setFont(new java.awt.Font("Tahoma", 0, 11));
+        setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         setIconImage(new ImageIcon(this.getClass().getResource("Icons/iconMain.gif")).getImage());
         setLocationByPlatform(true);
-        setName("mainFrame");
+        setName("mainFrame"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
+        toolBarsPanel.setFocusable(false);
         toolBarsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        toolBarsPanel.setFocusable(false);
         fileToolBar.setFocusable(false);
-        fileToolBar.setName("File");
+        fileToolBar.setName("File"); // NOI18N
         fileToolBar.setRequestFocusEnabled(false);
-        buttonNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileNew.gif")));
+
+        buttonNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileNew.gif"))); // NOI18N
         buttonNew.setToolTipText("New...");
         buttonNew.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         buttonNew.setBorderPainted(false);
@@ -221,10 +226,9 @@ public class Main extends javax.swing.JFrame {
                 newMenuItemActionPerformed(evt);
             }
         });
-
         fileToolBar.add(buttonNew);
 
-        buttonOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileOpen.gif")));
+        buttonOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileOpen.gif"))); // NOI18N
         buttonOpen.setToolTipText("Open...");
         buttonOpen.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         buttonOpen.setBorderPainted(false);
@@ -235,10 +239,9 @@ public class Main extends javax.swing.JFrame {
                 openMenuItemActionPerformed(evt);
             }
         });
-
         fileToolBar.add(buttonOpen);
 
-        buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileSave.gif")));
+        buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileSave.gif"))); // NOI18N
         buttonSave.setToolTipText("Save...");
         buttonSave.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         buttonSave.setBorderPainted(false);
@@ -250,15 +253,15 @@ public class Main extends javax.swing.JFrame {
                 saveMenuItemActionPerformed(evt);
             }
         });
-
         fileToolBar.add(buttonSave);
 
         toolBarsPanel.add(fileToolBar);
 
         editToolBar.setFocusable(false);
-        editToolBar.setName("Edit");
+        editToolBar.setName("Edit"); // NOI18N
         editToolBar.setRequestFocusEnabled(false);
-        buttonCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditCut.gif")));
+
+        buttonCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditCut.gif"))); // NOI18N
         buttonCut.setToolTipText("Cut...");
         buttonCut.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         buttonCut.setBorderPainted(false);
@@ -270,10 +273,9 @@ public class Main extends javax.swing.JFrame {
                 cutMenuItemActionPerformed(evt);
             }
         });
-
         editToolBar.add(buttonCut);
 
-        buttonCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditCopy.gif")));
+        buttonCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditCopy.gif"))); // NOI18N
         buttonCopy.setToolTipText("Copy...");
         buttonCopy.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         buttonCopy.setBorderPainted(false);
@@ -285,10 +287,9 @@ public class Main extends javax.swing.JFrame {
                 copyMenuItemActionPerformed(evt);
             }
         });
-
         editToolBar.add(buttonCopy);
 
-        buttonPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditPaste.gif")));
+        buttonPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditPaste.gif"))); // NOI18N
         buttonPaste.setToolTipText("Paste...");
         buttonPaste.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         buttonPaste.setBorderPainted(false);
@@ -300,15 +301,15 @@ public class Main extends javax.swing.JFrame {
                 pasteMenuItemActionPerformed(evt);
             }
         });
-
         editToolBar.add(buttonPaste);
 
         toolBarsPanel.add(editToolBar);
 
         triangleToolBar.setFocusable(false);
-        triangleToolBar.setName("Triangle");
+        triangleToolBar.setName("Triangle"); // NOI18N
         triangleToolBar.setRequestFocusEnabled(false);
-        buttonCompile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleCompile.gif")));
+
+        buttonCompile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleCompile.gif"))); // NOI18N
         buttonCompile.setToolTipText("Compile...");
         buttonCompile.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         buttonCompile.setBorderPainted(false);
@@ -320,10 +321,9 @@ public class Main extends javax.swing.JFrame {
                 compileMenuItemActionPerformed(evt);
             }
         });
-
         triangleToolBar.add(buttonCompile);
 
-        buttonRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleRun.gif")));
+        buttonRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleRun.gif"))); // NOI18N
         buttonRun.setToolTipText("Run...");
         buttonRun.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         buttonRun.setBorderPainted(false);
@@ -335,10 +335,19 @@ public class Main extends javax.swing.JFrame {
                 runMenuItemActionPerformed(evt);
             }
         });
-
         triangleToolBar.add(buttonRun);
 
         toolBarsPanel.add(triangleToolBar);
+
+        buttonDebug.setText("Debug");
+        buttonDebug.setToolTipText("Debug...");
+        buttonDebug.setEnabled(false);
+        buttonDebug.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDebugActionPerformed(evt);
+            }
+        });
+        toolBarsPanel.add(buttonDebug);
 
         getContentPane().add(toolBarsPanel, java.awt.BorderLayout.NORTH);
 
@@ -346,12 +355,13 @@ public class Main extends javax.swing.JFrame {
         desktopPane.setAutoscrolls(true);
         getContentPane().add(desktopPane, java.awt.BorderLayout.CENTER);
 
-        menuBar.setFont(new java.awt.Font("Verdana", 0, 11));
+        menuBar.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+
         fileMenu.setMnemonic('F');
         fileMenu.setText("File");
-        fileMenu.setBorderPainted(true);
+
         newMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        newMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileNew.gif")));
+        newMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileNew.gif"))); // NOI18N
         newMenuItem.setMnemonic('N');
         newMenuItem.setText("New");
         newMenuItem.setRequestFocusEnabled(false);
@@ -360,11 +370,10 @@ public class Main extends javax.swing.JFrame {
                 newMenuItemActionPerformed(evt);
             }
         });
-
         fileMenu.add(newMenuItem);
 
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        openMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileOpen.gif")));
+        openMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileOpen.gif"))); // NOI18N
         openMenuItem.setMnemonic('O');
         openMenuItem.setText("Open");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -372,11 +381,10 @@ public class Main extends javax.swing.JFrame {
                 openMenuItemActionPerformed(evt);
             }
         });
-
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        saveMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileSave.gif")));
+        saveMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconFileSave.gif"))); // NOI18N
         saveMenuItem.setMnemonic('S');
         saveMenuItem.setText("Save");
         saveMenuItem.setEnabled(false);
@@ -385,7 +393,6 @@ public class Main extends javax.swing.JFrame {
                 saveMenuItemActionPerformed(evt);
             }
         });
-
         fileMenu.add(saveMenuItem);
 
         saveAsMenuItem.setMnemonic('A');
@@ -396,9 +403,7 @@ public class Main extends javax.swing.JFrame {
                 saveAsMenuItemActionPerformed(evt);
             }
         });
-
         fileMenu.add(saveAsMenuItem);
-
         fileMenu.add(separatorExit);
 
         exitMenuItem.setMnemonic('x');
@@ -408,16 +413,15 @@ public class Main extends javax.swing.JFrame {
                 exitMenuItemActionPerformed(evt);
             }
         });
-
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
 
         editMenu.setMnemonic('E');
         editMenu.setText("Edit");
-        editMenu.setBorderPainted(true);
+
         cutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
-        cutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditCut.gif")));
+        cutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditCut.gif"))); // NOI18N
         cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Cut");
         cutMenuItem.setEnabled(false);
@@ -426,11 +430,10 @@ public class Main extends javax.swing.JFrame {
                 cutMenuItemActionPerformed(evt);
             }
         });
-
         editMenu.add(cutMenuItem);
 
         copyMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        copyMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditCopy.gif")));
+        copyMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditCopy.gif"))); // NOI18N
         copyMenuItem.setMnemonic('C');
         copyMenuItem.setText("Copy");
         copyMenuItem.setEnabled(false);
@@ -439,11 +442,10 @@ public class Main extends javax.swing.JFrame {
                 copyMenuItemActionPerformed(evt);
             }
         });
-
         editMenu.add(copyMenuItem);
 
         pasteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        pasteMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditPaste.gif")));
+        pasteMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconEditPaste.gif"))); // NOI18N
         pasteMenuItem.setMnemonic('P');
         pasteMenuItem.setText("Paste");
         pasteMenuItem.setToolTipText("");
@@ -453,16 +455,15 @@ public class Main extends javax.swing.JFrame {
                 pasteMenuItemActionPerformed(evt);
             }
         });
-
         editMenu.add(pasteMenuItem);
 
         menuBar.add(editMenu);
 
         triangleMenu.setMnemonic('T');
         triangleMenu.setText("Triangle");
-        triangleMenu.setBorderPainted(true);
+
         compileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
-        compileMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleCompile.gif")));
+        compileMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleCompile.gif"))); // NOI18N
         compileMenuItem.setMnemonic('C');
         compileMenuItem.setText("Compile");
         compileMenuItem.setEnabled(false);
@@ -471,11 +472,10 @@ public class Main extends javax.swing.JFrame {
                 compileMenuItemActionPerformed(evt);
             }
         });
-
         triangleMenu.add(compileMenuItem);
 
         runMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
-        runMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleRun.gif")));
+        runMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleRun.gif"))); // NOI18N
         runMenuItem.setMnemonic('R');
         runMenuItem.setText("Run");
         runMenuItem.setEnabled(false);
@@ -484,15 +484,14 @@ public class Main extends javax.swing.JFrame {
                 runMenuItemActionPerformed(evt);
             }
         });
-
         triangleMenu.add(runMenuItem);
 
         menuBar.add(triangleMenu);
 
         helpMenu.setMnemonic('H');
         helpMenu.setText("Help");
-        helpMenu.setBorderPainted(true);
-        aboutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconHelpAbout.gif")));
+
+        aboutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconHelpAbout.gif"))); // NOI18N
         aboutMenuItem.setMnemonic('A');
         aboutMenuItem.setText("About");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -500,7 +499,6 @@ public class Main extends javax.swing.JFrame {
                 aboutMenuItemActionPerformed(evt);
             }
         });
-
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(helpMenu);
@@ -533,7 +531,7 @@ public class Main extends javax.swing.JFrame {
         while (desktopPane.getComponentCount() > 0) {
             try { 
                 desktopPane.getSelectedFrame().setClosed(true);
-            } catch (Exception e) { }
+            } catch (PropertyVetoException e) { }
         }
     }//GEN-LAST:event_formWindowClosing
 
@@ -590,7 +588,7 @@ public class Main extends javax.swing.JFrame {
                     sr += (char)br.read();
                 br.close();
                 addInternalFrame(chooser.getSelectedFile().getPath(), sr.replace("\r\n", "\n")).setPreviouslySaved(true);
-            } catch (Exception e) {
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "An error occurred while trying to open the specified file", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -607,6 +605,7 @@ public class Main extends javax.swing.JFrame {
         if (((FileFrame)desktopPane.getSelectedFrame()).getPreviouslySaved()) {
             ((FileFrame)desktopPane.getSelectedFrame()).selectConsole();
             ((FileFrame)desktopPane.getSelectedFrame()).clearConsole();
+			((FileFrame)desktopPane.getSelectedFrame()).clearDebug();
             ((FileFrame)desktopPane.getSelectedFrame()).clearTAMCode();
             ((FileFrame)desktopPane.getSelectedFrame()).clearTree();
             ((FileFrame)desktopPane.getSelectedFrame()).clearTable();
@@ -621,10 +620,12 @@ public class Main extends javax.swing.JFrame {
                 
                 runMenuItem.setEnabled(true);
                 buttonRun.setEnabled(true);
+				buttonDebug.setEnabled(true);
             } else {
                 ((FileFrame)desktopPane.getSelectedFrame()).highlightError(compiler.getErrorPosition());
                 runMenuItem.setEnabled(true);
-                buttonRun.setEnabled(true);
+                buttonRun.setEnabled(false);
+				buttonDebug.setEnabled(false);
             }
         }
     }//GEN-LAST:event_compileMenuItemActionPerformed
@@ -658,7 +659,7 @@ public class Main extends javax.swing.JFrame {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
                 bw.write(((FileFrame)desktopPane.getSelectedFrame()).getSourcePaneText().replace("\n", "\r\n"));
                 bw.close();
-            } catch (Exception e) {
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "An error occurred while trying to save the specified file", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -689,6 +690,13 @@ public class Main extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
+    private void buttonDebugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDebugActionPerformed
+		((FileFrame)desktopPane.getSelectedFrame()).clearDebug();
+		output.setDelegate(delegateDebug);
+		disassembler.Disassemble(desktopPane.getSelectedFrame().getTitle().replace(".tri", ".tam"));
+		((FileFrame)desktopPane.getSelectedFrame()).selectDebugging();
+    }//GEN-LAST:event_buttonDebugActionPerformed
+
     // </editor-fold>    
            
     // <editor-fold defaultstate="collapsed" desc=" Delegates and Listeners ">    
@@ -698,6 +706,7 @@ public class Main extends javax.swing.JFrame {
      * "Save" button and menu option.
      */   
     KeyAdapter delegateSaveButton = new KeyAdapter() {
+		@Override
         public void keyReleased(java.awt.event.KeyEvent evt) {
              checkSaveChanges();
              ((FileFrame)desktopPane.getSelectedFrame()).UpdateRowColNumbers();
@@ -705,19 +714,24 @@ public class Main extends javax.swing.JFrame {
     };
     
     MouseListener delegateMouse = new MouseListener() {
+		@Override
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             ((FileFrame)desktopPane.getSelectedFrame()).UpdateRowColNumbers();
         }
         
+		@Override
         public void mouseExited(java.awt.event.MouseEvent evt) {
         }
 
+		@Override
         public void mouseEntered(java.awt.event.MouseEvent evt) {
         }        
         
+		@Override
         public void mouseReleased(java.awt.event.MouseEvent evt) {
         }       
 
+		@Override
         public void mousePressed(java.awt.event.MouseEvent evt) {
         }        
     };
@@ -731,6 +745,7 @@ public class Main extends javax.swing.JFrame {
          * Every time a frame is focused/activated, some buttons can be
          * enabled (e.g. "Save", "Cut", "Copy", "Paste").
          */
+		@Override
         public void internalFrameActivated(InternalFrameEvent evt) { 
             checkPaneChanges();
             ((FileFrame)desktopPane.getSelectedFrame()).UpdateRowColNumbers();
@@ -740,6 +755,7 @@ public class Main extends javax.swing.JFrame {
          * Every time a frame is closed, some buttons can be
          * disabled (e.g. "Save", "Cut", "Copy", "Paste").
          */        
+		@Override
         public void internalFrameClosed(InternalFrameEvent evt) {
             checkPaneChanges();
         }
@@ -748,6 +764,7 @@ public class Main extends javax.swing.JFrame {
          * Before closing a frame, checks if the file has not been
          * saved yet.
          */
+		@Override
         public void internalFrameClosing(InternalFrameEvent evt) {
             if (((FileFrame)desktopPane.getSelectedFrame()).hasChanged()) { 
                 if (JOptionPane.showConfirmDialog(null, "Do you want to save the changes to " + desktopPane.getSelectedFrame().getTitle() + "?", "Save", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)    
@@ -756,9 +773,13 @@ public class Main extends javax.swing.JFrame {
         }
         
         // Required by interface - not implemented
+		@Override
         public void internalFrameDeactivated(InternalFrameEvent evt) { }
+		@Override
         public void internalFrameDeiconified(InternalFrameEvent evt) { }
+		@Override
         public void internalFrameIconified(InternalFrameEvent evt) { }
+		@Override
         public void internalFrameOpened(InternalFrameEvent evt) { }
     };
     
@@ -767,6 +788,7 @@ public class Main extends javax.swing.JFrame {
      * Used to redirect the console output - writes in the "Console" panel.     
      */
     ActionListener delegateConsole = new ActionListener() {
+		@Override
         public void actionPerformed(ActionEvent e) {
             while (output.peekQueue())
                 ((FileFrame)desktopPane.getSelectedFrame()).writeToConsole(output.readQueue());
@@ -777,16 +799,26 @@ public class Main extends javax.swing.JFrame {
      * Used to redirect the console output - writes in the "TAM Code" pane.
      */
     ActionListener delegateTAMCode = new ActionListener() {
+		@Override
         public void actionPerformed(ActionEvent e) {
             while (output.peekQueue())
                 ((FileFrame)desktopPane.getSelectedFrame()).writeToTAMCode(output.readQueue());
-        }        
+        }
     };
+	
+	ActionListener delegateDebug = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			while (output.peekQueue())
+                ((FileFrame)desktopPane.getSelectedFrame()).writeTAMDebug(output.readQueue());
+		}
+	};
     
     /**
      * Used to redirect the console input - enables the "Console Input" text box.
      */
     ActionListener delegateInput = new ActionListener() {
+		@Override
         public void actionPerformed(ActionEvent e) {
             ((FileFrame)desktopPane.getSelectedFrame()).setInputEnabled(true);
         }
@@ -796,6 +828,7 @@ public class Main extends javax.swing.JFrame {
      * Used to redirect the console input - writes the user input in the console.
      */
     ActionListener delegateEnter = new ActionListener() {
+		@Override
         public void actionPerformed(ActionEvent e) {
             ((FileFrame)desktopPane.getSelectedFrame()).setInputEnabled(false);
             input.addInput(((FileFrame)desktopPane.getSelectedFrame()).getInputFieldText() + "\n");
@@ -807,6 +840,7 @@ public class Main extends javax.swing.JFrame {
      * Used to control running programs - only one TAM program can be run at once
      */
     ActionListener delegateRun = new ActionListener() {
+		@Override
         public void actionPerformed(ActionEvent e) {
             runMenuItem.setEnabled(true);
             buttonRun.setEnabled(true);
@@ -822,6 +856,7 @@ public class Main extends javax.swing.JFrame {
     javax.swing.JButton buttonCompile;
     javax.swing.JButton buttonCopy;
     javax.swing.JButton buttonCut;
+    javax.swing.JButton buttonDebug;
     javax.swing.JButton buttonNew;
     javax.swing.JButton buttonOpen;
     javax.swing.JButton buttonPaste;
@@ -876,6 +911,7 @@ public class Main extends javax.swing.JFrame {
         /**
          * Required by interface - not implemented
          */
+		@Override
         public void lostOwnership(Clipboard aClipboard, Transferable aContents) { }
         
         /**
@@ -898,12 +934,14 @@ public class Main extends javax.swing.JFrame {
                 try {
                     DataFlavor flavorSet[] = contents.getTransferDataFlavors();
                     boolean canString = false;
-                    for (int i=0;i<flavorSet.length;i++)
-                        if (flavorSet[i] == DataFlavor.stringFlavor)
-                            canString = true;
+					for (DataFlavor flavorSet1 : flavorSet) {
+						if (flavorSet1 == DataFlavor.stringFlavor) {
+							canString = true;
+						}
+					}
                     
                     ret = (String)contents.getTransferData(DataFlavor.stringFlavor);
-                } catch (Exception e) { }
+                } catch (UnsupportedFlavorException | IOException e) { }
             }
             return(ret);
         }        

@@ -24,11 +24,9 @@ public class IDEDisassembler {
      * @param fileName Path to the TAM Object file.
      */
     public void Disassemble(final String fileName) {
-        new Thread(new Runnable() {
-            public void run() {
-                TAM.Disassembler.main(new String[] {fileName});
-            }
-        }).start();        
+        new Thread(() -> {
+			TAM.Disassembler.main(new String[] {fileName});
+		}).start();
     }
     // </editor-fold>    
 }
