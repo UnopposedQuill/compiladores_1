@@ -1,15 +1,19 @@
-# Plantilla de cambios
+#### Type of Change
+- [ ] New Characteristic
+- [ ] Enhancement of Former Characteristics
+- [ ] Bug Fixing
+- [ ] Code Cleaning
+- [ ] Documentation
+- [ ] Another
 
-#### Tipo de cambio
-- [ ] Característica nueva
-- [ ] Mejora
-- [ ] Arreglo de bug
+### Change Description
+    [Brief description of the change here]
 
-### Descripción del cambio
-    [Describir brevemente el propósito del cambio y de qué trata]
+#### How to check the changes
+    [Explain how to check the changes. What's the expected input and output and how to access them]
 
-#### ¿Cómo revisar los cambios?
-    [Explique cómo comprobar los cambios. Qué se espera que entre, qué se espera que salga y cómo acceder a ellos]
-    
-### Otros detalles
+#### How to test changes
+    [How can this changes be tested, if applies]
+
+### Other details
     [...]

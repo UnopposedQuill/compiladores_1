@@ -1,10 +1,6 @@
-# Proyecto del curso de Compiladores
-#### ITCR
-#### II semestre 2019
-#### Profesor: Ignacio Trejos Zelaya
 
-###### Integrantes:
-- Jose Pablo Feng Liu
-- Paul Esteban Gutierrez Salas
-- William Mauricio Quirós Bravo
-- Paul Andree Villafuerte Beita
+# Triangle TAM Compiler, with IDE
+
+This compiler was based on a former project from the Compilers and Interpreters
+course and repurposed to become an full complete IDE for the Extended Triangle
+Language.

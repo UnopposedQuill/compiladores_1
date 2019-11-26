@@ -1,7 +1,4 @@
 
-# Created by https://www.gitignore.io/api/java,netbeans
-# Edit at https://www.gitignore.io/?templates=java,netbeans
-
 ### Java ###
 # Compiled class file
 *.class
@@ -34,6 +31,7 @@ build/
 nbbuild/
 nbdist/
 .nb-gradle/
+dist/
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
