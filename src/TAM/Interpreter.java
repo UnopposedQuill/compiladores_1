@@ -18,12 +18,13 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Interpreter {
 
 
   static String objectName;
-
 
 // DATA STORE
 
@@ -37,15 +38,17 @@ public class Interpreter {
     SB = 0,
     HB = 1024;  // = upper bound of data array + 1
 
-  static int
-    CT, CP, ST, HT, LB, status;
-
   // status values
-  final static int
+  public final static int
     running = 0, halted = 1, failedDataStoreFull = 2, failedInvalidCodeAddress = 3,
     failedInvalidInstruction = 4, failedOverflow = 5, failedZeroDivide = 6,
-    failedIOError = 7, failedArrayIndexOutOfBounds = 8;
+    failedIOError = 7, failedArrayIndexOutOfBounds = 8, debugging = 9;
+  
+  static int
+    CT, CP, ST, HT, LB, status = halted;
 
+  public static boolean waiting = true;
+  
   static long
     accumulator;
 
@@ -94,7 +97,7 @@ public class Interpreter {
 
 // PROGRAM STATUS
 
-  static void dump() {
+  public static void dump() {
     // Writes a summary of the machine state.
     int
       addr, staticLink, dynamicLink,
@@ -178,7 +181,7 @@ public class Interpreter {
     System.out.println ("");
   }
 
-  static void showStatus () {
+  public static void showStatus () {
     // Writes an indication of whether and why the program has terminated.
     System.out.println ("");
     switch (status) {
@@ -208,7 +211,10 @@ public class Interpreter {
         break;
       case failedArrayIndexOutOfBounds:
         System.out.println("Program has failed due to an Index Out of Bounds");
-      break;
+		break;
+	  case debugging:
+		System.out.println("Program is being debugged");
+		break;
     }
     if (status != halted)
       dump();
@@ -441,7 +447,7 @@ public class Interpreter {
     }
   }
 
-  static void interpretProgram() {
+  public static void interpretProgram(int interpreterStatus) {
     // Runs the program in code store.
 
     Instruction currentInstr;
@@ -452,8 +458,16 @@ public class Interpreter {
     HT = HB;
     LB = SB;
     CP = CB;
-    status = running;
+    status = interpreterStatus;
     do {
+		while (waiting) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException ex) {
+				Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		if (status == debugging) waiting = true;
       // Fetch instruction ...
       currentInstr = Machine.code[CP];
       // Decode instruction ...
@@ -462,7 +476,6 @@ public class Interpreter {
       n = currentInstr.n;
       d = currentInstr.d;
       // Execute instruction ...
-      //dump();//Debugging
       switch (op) {
         case Machine.LOADop:
           addr = d + content(r);
@@ -582,9 +595,8 @@ public class Interpreter {
           status = halted;
           break;
       }
-      if ((CP < CB) || (CP >= CT))
-        status = failedInvalidCodeAddress;
-    } while (status == running);
+		if ((CP < CB) || (CP >= CT))	status = failedInvalidCodeAddress;
+    } while (status == running || status == debugging);
   }
 
 
@@ -593,8 +605,8 @@ public class Interpreter {
   static void loadObjectProgram (String objectName) {
     // Loads the TAM object program into code store from the named file.
 
-    FileInputStream objectFile = null;
-    DataInputStream objectStream = null;
+    FileInputStream objectFile;
+    DataInputStream objectStream;
 
     int addr;
     boolean finished = false;
@@ -625,18 +637,26 @@ public class Interpreter {
 
 // RUNNING
 
-  public static void main(String[] args) {
+  public synchronized static void main(String[] args) {
     System.out.println("********** TAM Interpreter (Java Version 2.1) **********");
-
-    if (args.length == 1)
-      objectName = args[0];
-  	else
-      objectName = "obj.tam";
+	int interpreterStatus;
+    if (args.length == 2){
+		objectName = args[0];
+		interpreterStatus = debugging;
+	}
+	else{
+		objectName = "obj.tam";
+		interpreterStatus = running;
+	}
 
     loadObjectProgram(objectName);
     if (CT != CB) {
-      interpretProgram();
-      showStatus();
+		interpretProgram(interpreterStatus);
+		if (interpreterStatus == debugging) {
+			dump();
+		} else {
+			showStatus();
+		}
     }
   }
 }

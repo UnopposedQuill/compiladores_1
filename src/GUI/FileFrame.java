@@ -4,9 +4,12 @@
  */
 
 package GUI;
+import TAM.Interpreter;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JTable;
 import javax.swing.JTree;
@@ -172,18 +175,20 @@ public class FileFrame extends javax.swing.JInternalFrame {
   
   //@TODO: Implement
   /**
-   * Clears de Debug Text and resets the stack visualization
+   * Clears Debug Text and resets the stack visualization
    */
   public void clearDebug(){
 	  debugTAMPane.setText("");
+	  interpreterPane.setText("");
   }
   
   public void writeTAMDebug(String text){
 	  debugTAMPane.setText(debugTAMPane.getText() + text);
   }
   
-  public void writeToDebug(String text){
-	  
+  //@TODO: Implement
+  public void writeToInterpreter(String text){
+	  interpreterPane.setText(interpreterPane.getText() + text);
   }
 
   /**
@@ -307,6 +312,17 @@ public class FileFrame extends javax.swing.JInternalFrame {
       tableScroll.add(idTable);
       tableScroll.setViewportView(idTable);
   }
+  
+  /**
+   * Toggles debugging controls depending on enabled
+   * @param enabled Whether the controls will be active, True to enable, False
+   * to disable
+   */
+  public void debuggingEnabled(boolean enabled){
+	  buttonContinueRun.setEnabled(enabled);
+	  buttonNextInstruction.setEnabled(enabled);
+	  buttonStopDebugging.setEnabled(enabled);
+  }
   // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -401,17 +417,27 @@ public class FileFrame extends javax.swing.JInternalFrame {
         debugPanel.setLayout(new java.awt.BorderLayout());
 
         buttonStopDebugging.setText("Stop");
+        buttonStopDebugging.setEnabled(false);
         debugControlsPanel.add(buttonStopDebugging);
 
         buttonContinueRun.setText("Continue Run");
+        buttonContinueRun.setEnabled(false);
         debugControlsPanel.add(buttonContinueRun);
 
         buttonNextInstruction.setText("Next Instruction");
+        buttonNextInstruction.setEnabled(false);
+        buttonNextInstruction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonNextInstructionActionPerformed(evt);
+            }
+        });
         debugControlsPanel.add(buttonNextInstruction);
 
         debugPanel.add(debugControlsPanel, java.awt.BorderLayout.PAGE_START);
 
         debugInformationPanel.setLayout(new javax.swing.BoxLayout(debugInformationPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        splitPane.setDividerLocation(150);
 
         debugTAMPane.setEditable(false);
         debugTAMScroll.setViewportView(debugTAMPane);
@@ -450,7 +476,19 @@ public class FileFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-      
+
+	// <editor-fold defaultstate="collapsed" desc="Event Handlers">
+    private void buttonNextInstructionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextInstructionActionPerformed
+		Interpreter.waiting = false;
+	  try {
+		  Thread.sleep(500);
+	  } catch (InterruptedException ex) {
+		  Logger.getLogger(FileFrame.class.getName()).log(Level.SEVERE, null, ex);
+	  }
+		Interpreter.showStatus();
+    }//GEN-LAST:event_buttonNextInstructionActionPerformed
+    
+	// </editor-fold>
   // <editor-fold defaultstate="collapsed" desc=" GUI Variables ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane astScroll;

@@ -188,17 +188,23 @@
                 <Component class="javax.swing.JButton" name="buttonStopDebugging">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Stop"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="buttonContinueRun">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Continue Run"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="buttonNextInstruction">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Next Instruction"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNextInstructionActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -212,6 +218,9 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
               <SubComponents>
                 <Container class="javax.swing.JSplitPane" name="splitPane">
+                  <Properties>
+                    <Property name="dividerLocation" type="int" value="150"/>
+                  </Properties>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
                   <SubComponents>

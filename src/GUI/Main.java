@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import Triangle.IDECompiler;
 import Core.ExampleFileFilter;
+import Core.IDE.IDEDebugger;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import Core.Visitors.TreeVisitor;
@@ -193,6 +194,7 @@ public class Main extends javax.swing.JFrame {
         triangleMenu = new javax.swing.JMenu();
         compileMenuItem = new javax.swing.JMenuItem();
         runMenuItem = new javax.swing.JMenuItem();
+        debugMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
 
@@ -461,6 +463,7 @@ public class Main extends javax.swing.JFrame {
 
         triangleMenu.setMnemonic('T');
         triangleMenu.setText("Triangle");
+        triangleMenu.setEnabled(false);
 
         compileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         compileMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleCompile.gif"))); // NOI18N
@@ -485,6 +488,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
         triangleMenu.add(runMenuItem);
+
+        debugMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
+        debugMenuItem.setText("Debug");
+        triangleMenu.add(debugMenuItem);
 
         menuBar.add(triangleMenu);
 
@@ -514,7 +521,7 @@ public class Main extends javax.swing.JFrame {
      * Handles the "Run TAM Program" button and menu option.
      */
     private void runMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runMenuItemActionPerformed
-        ((FileFrame)desktopPane.getSelectedFrame()).clearConsole();
+		((FileFrame)desktopPane.getSelectedFrame()).clearConsole();
         ((FileFrame)desktopPane.getSelectedFrame()).selectConsole();
         output.setDelegate(delegateConsole);
         runMenuItem.setEnabled(false);
@@ -609,6 +616,7 @@ public class Main extends javax.swing.JFrame {
             ((FileFrame)desktopPane.getSelectedFrame()).clearTAMCode();
             ((FileFrame)desktopPane.getSelectedFrame()).clearTree();
             ((FileFrame)desktopPane.getSelectedFrame()).clearTable();
+			((FileFrame)desktopPane.getSelectedFrame()).debuggingEnabled(false);
             new File(desktopPane.getSelectedFrame().getTitle().replace(".tri", ".tam")).delete();
             
             output.setDelegate(delegateConsole);            
@@ -620,11 +628,13 @@ public class Main extends javax.swing.JFrame {
                 
                 runMenuItem.setEnabled(true);
                 buttonRun.setEnabled(true);
+				debugMenuItem.setEnabled(true);
 				buttonDebug.setEnabled(true);
             } else {
                 ((FileFrame)desktopPane.getSelectedFrame()).highlightError(compiler.getErrorPosition());
-                runMenuItem.setEnabled(true);
+                runMenuItem.setEnabled(false);
                 buttonRun.setEnabled(false);
+				debugMenuItem.setEnabled(false);
 				buttonDebug.setEnabled(false);
             }
         }
@@ -691,10 +701,17 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void buttonDebugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDebugActionPerformed
+		// Begin debugging
 		((FileFrame)desktopPane.getSelectedFrame()).clearDebug();
-		output.setDelegate(delegateDebug);
-		disassembler.Disassemble(desktopPane.getSelectedFrame().getTitle().replace(".tri", ".tam"));
-		((FileFrame)desktopPane.getSelectedFrame()).selectDebugging();
+		((FileFrame)desktopPane.getSelectedFrame()).clearConsole();
+        ((FileFrame)desktopPane.getSelectedFrame()).selectDebugging();
+		((FileFrame)desktopPane.getSelectedFrame()).debuggingEnabled(true);
+        output.setDelegate(delegateConsole);
+        runMenuItem.setEnabled(false);
+        buttonRun.setEnabled(false);
+        compileMenuItem.setEnabled(false);
+        buttonCompile.setEnabled(false);
+		debugger.Run(desktopPane.getSelectedFrame().getTitle().replace(".tri", ".tam"));
     }//GEN-LAST:event_buttonDebugActionPerformed
 
     // </editor-fold>    
@@ -865,6 +882,7 @@ public class Main extends javax.swing.JFrame {
     javax.swing.JMenuItem compileMenuItem;
     javax.swing.JMenuItem copyMenuItem;
     javax.swing.JMenuItem cutMenuItem;
+    javax.swing.JMenuItem debugMenuItem;
     javax.swing.JDesktopPane desktopPane;
     javax.swing.JMenu editMenu;
     javax.swing.JToolBar editToolBar;
@@ -893,6 +911,7 @@ public class Main extends javax.swing.JFrame {
     IDECompiler compiler = new IDECompiler();                               // Compiler - Analyzes/generates TAM programs
     IDEDisassembler disassembler = new IDEDisassembler();                   // Disassembler - Generates TAM Code
     IDEInterpreter interpreter = new IDEInterpreter(delegateRun);           // Interpreter - Runs TAM programs
+	IDEDebugger debugger = new IDEDebugger(delegateDebug);
     OutputRedirector output = new OutputRedirector();                       // Redirects the console output
     InputRedirector input = new InputRedirector(delegateInput);             // Redirects console input
     TreeVisitor treeVisitor = new TreeVisitor();                            // Draws the Abstract Syntax Trees
