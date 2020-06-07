@@ -645,7 +645,7 @@ public class Interpreter {
 		interpreterStatus = debugging;
 	}
 	else{
-		objectName = "obj.tam";
+		objectName = args[0];
 		interpreterStatus = running;
 	}
 
