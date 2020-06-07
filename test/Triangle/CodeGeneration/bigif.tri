@@ -1,0 +1,15 @@
+let
+	const x ~ 1;
+	var y init 0
+in
+	if x > y
+	then
+		putint(1)
+	else if y < 1
+		then
+			putint(2)
+		else
+			putint(3)
+		end
+	end
+end
