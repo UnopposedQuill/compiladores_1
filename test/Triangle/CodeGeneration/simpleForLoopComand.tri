@@ -1,0 +1,4 @@
+loop for x ~ 2 to 5
+do
+	putint(x)
+repeat
