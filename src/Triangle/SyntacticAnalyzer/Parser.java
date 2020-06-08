@@ -151,7 +151,7 @@ public class Parser {
 
   public Program parseProgram() {
 
-    Program programAST = null;
+    Program programAST;
 
     previousTokenPosition.start = 0;
     previousTokenPosition.finish = 0;
@@ -179,7 +179,7 @@ public class Parser {
 // a leaf AST to represent it.
 
   IntegerLiteral parseIntegerLiteral() throws SyntaxError {
-    IntegerLiteral IL = null;
+    IntegerLiteral IL;
 
     if (currentToken.kind == Token.INTLITERAL) {
       previousTokenPosition = currentToken.position;
@@ -197,7 +197,7 @@ public class Parser {
 // AST to represent it.
 
   CharacterLiteral parseCharacterLiteral() throws SyntaxError {
-    CharacterLiteral CL = null;
+    CharacterLiteral CL;
 
     if (currentToken.kind == Token.CHARLITERAL) {
       previousTokenPosition = currentToken.position;
@@ -215,7 +215,7 @@ public class Parser {
 // represent it.
 
   Identifier parseIdentifier() throws SyntaxError {
-    Identifier I = null;
+    Identifier I;
 
     if (currentToken.kind == Token.IDENTIFIER) {
       previousTokenPosition = currentToken.position;
@@ -233,7 +233,7 @@ public class Parser {
 // represent it.
 
   Operator parseOperator() throws SyntaxError {
-    Operator O = null;
+    Operator O;
 
     if (currentToken.kind == Token.OPERATOR) {
       previousTokenPosition = currentToken.position;
@@ -257,7 +257,7 @@ public class Parser {
 // to represent its phrase structure.
 
   Command parseCommand() throws SyntaxError {
-    Command commandAST = null; // in case there's a syntactic error
+    Command commandAST; // in case there's a syntactic error
 
     SourcePosition commandPos = new SourcePosition();
 
@@ -279,7 +279,6 @@ public class Parser {
     start(commandPos);
 
     switch (currentToken.kind) {
-
     case Token.IDENTIFIER:
       {
         Identifier iAST = parseIdentifier();
@@ -341,15 +340,6 @@ public class Parser {
         commandAST = new EmptyCommand(commandPos);
         break;
     }
-    
-    case Token.END:
-    case Token.ELSE:
-    case Token.IN:
-    case Token.EOT:
-
-      finish(commandPos);
-      commandAST = new EmptyCommand(commandPos);
-      break;
 
     default:
       syntacticError("\"%\" cannot start a command",
@@ -430,7 +420,7 @@ public class Parser {
 ///////////////////////////////////////////////////////////////////////////////
 
   Expression parseExpression() throws SyntaxError {
-    Expression expressionAST = null; // in case there's a syntactic error
+    Expression expressionAST;
 
     SourcePosition expressionPos = new SourcePosition();
 
@@ -470,7 +460,7 @@ public class Parser {
   }
 
   Expression parseSecondaryExpression() throws SyntaxError {
-    Expression expressionAST = null; // in case there's a syntactic error
+    Expression expressionAST;
 
     SourcePosition expressionPos = new SourcePosition();
     start(expressionPos);
@@ -572,7 +562,7 @@ public class Parser {
   }
 
   RecordAggregate parseRecordAggregate() throws SyntaxError {
-    RecordAggregate aggregateAST = null; // in case there's a syntactic error
+    RecordAggregate aggregateAST;
 
     SourcePosition aggregatePos = new SourcePosition();
     start(aggregatePos);
@@ -594,7 +584,7 @@ public class Parser {
   }
 
   ArrayAggregate parseArrayAggregate() throws SyntaxError {
-    ArrayAggregate aggregateAST = null; // in case there's a syntactic error
+    ArrayAggregate aggregateAST;
 
     SourcePosition aggregatePos = new SourcePosition();
     start(aggregatePos);
@@ -619,14 +609,14 @@ public class Parser {
 ///////////////////////////////////////////////////////////////////////////////
 
   Vname parseVname () throws SyntaxError {
-    Vname vnameAST = null; // in case there's a syntactic error
+    Vname vnameAST;
     Identifier iAST = parseIdentifier();
     vnameAST = parseRestOfVname(iAST);
     return vnameAST;
   }
 
   Vname parseRestOfVname(Identifier identifierAST) throws SyntaxError {
-    SourcePosition vnamePos = new SourcePosition();
+    SourcePosition vnamePos;
     vnamePos = identifierAST.position;
     Vname vAST = new SimpleVname(identifierAST, vnamePos);
 
@@ -694,7 +684,7 @@ public class Parser {
 
   //This method was modified to work with the new rule named parseCompoundDeclaration, and with a recursive call.
   Declaration parseDeclaration() throws SyntaxError {
-    Declaration declarationAST = null; // in case there's a syntactic error
+    Declaration declarationAST;
 
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
@@ -912,7 +902,7 @@ public class Parser {
   }
 
   FormalParameterSequence parseProperFormalParameterSequence() throws SyntaxError {
-    FormalParameterSequence formalsAST = null; // in case there's a syntactic error;
+    FormalParameterSequence formalsAST;
 
     SourcePosition formalsPos = new SourcePosition();
     start(formalsPos);
@@ -1013,7 +1003,7 @@ public class Parser {
   }
 
   ActualParameterSequence parseProperActualParameterSequence() throws SyntaxError {
-    ActualParameterSequence actualsAST = null; // in case there's a syntactic error
+    ActualParameterSequence actualsAST;
 
     SourcePosition actualsPos = new SourcePosition();
 
@@ -1146,7 +1136,7 @@ public class Parser {
   }
 
   FieldTypeDenoter parseFieldTypeDenoter() throws SyntaxError {
-    FieldTypeDenoter fieldAST = null; // in case there's a syntactic error
+    FieldTypeDenoter fieldAST;
 
     SourcePosition fieldPos = new SourcePosition();
 
