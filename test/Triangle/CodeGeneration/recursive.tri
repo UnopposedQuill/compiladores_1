@@ -1,0 +1,14 @@
+let
+	recursive
+		proc printl(x:Integer) ~
+			print(x);puteol()
+		end
+	and
+		proc print(x:Integer) ~
+			putint(x)
+		end
+	end
+in
+	printl(1)
+end
+			

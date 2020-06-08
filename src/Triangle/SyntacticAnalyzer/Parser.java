@@ -705,34 +705,27 @@ public class Parser {
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
 
-    switch (currentToken.kind) {
-      case Token.PROC:
-      case Token.FUNC:
+    if (currentToken.kind == Token.PROC || currentToken.kind == Token.FUNC){
         declarationAST = parsePROC_FUNC();
         finish(declarationPos);
-        break;
-      default:
-        syntacticError("\"%\" error parsing proc-funcs, unexpected token",
+    } else {
+        syntacticError("\"%\" not expected while parsing further proc-funcs, expected \"PROC\" or \"FUNC\"",
                 currentToken.spelling);
-        break;
     }
 
     do {
-      accept(Token.AND);
-      switch(currentToken.kind){
-        case Token.PROC:
-        case Token.FUNC:
-          start(declarationPos);
-          Declaration dAST2 = parsePROC_FUNC();
-          finish(declarationPos);
-          declarationAST = new SequentialDeclaration(declarationAST, dAST2, declarationPos);
-          break;
-        default:
-          syntacticError("\"%\" does not start a proc nor func.",
-                  currentToken.spelling);
-          break;
-      }
+        accept(Token.AND);
+        if (currentToken.kind == Token.PROC || currentToken.kind == Token.FUNC){
+            start(declarationPos);
+            Declaration dAST2 = parsePROC_FUNC();
+            finish(declarationPos);
+            declarationAST = new SequentialDeclaration(declarationAST, dAST2, declarationPos);
+        } else {
+            syntacticError("\"%\" not expected while parsing further proc-funcs, expected \"PROC\" or \"FUNC\"",
+                    currentToken.spelling);
+        }
     } while (currentToken.kind == Token.AND);
+
     return declarationAST;
   }
 

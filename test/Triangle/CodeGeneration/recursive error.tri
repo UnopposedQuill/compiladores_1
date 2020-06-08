@@ -1,0 +1,16 @@
+let
+	recursive
+		proc test(x:Integer) ~
+			putint(x)
+		end
+	and
+		proc printl(x:Integer) ~
+			test(x);puteol()
+		end
+	and
+		const
+	end
+in
+	printl(1)
+end
+			
