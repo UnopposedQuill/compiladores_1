@@ -103,9 +103,10 @@ public class Parser {
     previousTokenPosition = new SourcePosition();
   }
 
-// accept checks whether the current token matches tokenExpected.
-// If so, fetches the next token.
-// If not, reports a syntactic error.
+  //<editor-fold defaultstate="collapsed" desc="Methods">
+  // accept checks whether the current token matches tokenExpected.
+  // If so, fetches the next token.
+  // If not, reports a syntactic error.
 
   void accept (int tokenExpected) throws SyntaxError {
     if (currentToken.kind == tokenExpected) {
@@ -121,17 +122,17 @@ public class Parser {
     currentToken = lexicalAnalyser.scan();
   }
 
-// start records the position of the start of a phrase.
-// This is defined to be the position of the first
-// character of the first token of the phrase.
+  // start records the position of the start of a phrase.
+  // This is defined to be the position of the first
+  // character of the first token of the phrase.
 
   void start(SourcePosition position) {
     position.start = currentToken.position.start;
   }
 
-// finish records the position of the end of a phrase.
-// This is defined to be the position of the last
-// character of the last token of the phrase.
+  // finish records the position of the end of a phrase.
+  // This is defined to be the position of the last
+  // character of the last token of the phrase.
 
   void finish(SourcePosition position) {
     position.finish = previousTokenPosition.finish;
@@ -143,11 +144,14 @@ public class Parser {
     throw(new SyntaxError());
   }
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// PROGRAMS
-//
-///////////////////////////////////////////////////////////////////////////////
+  //</editor-fold>
+
+  //<editor-fold defaultstate="collapsed" desc="Programs">
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // PROGRAMS
+  //
+  ///////////////////////////////////////////////////////////////////////////////
 
   public Program parseProgram() {
 
@@ -169,14 +173,17 @@ public class Parser {
     return programAST;
   }
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// LITERALS
-//
-///////////////////////////////////////////////////////////////////////////////
+  //</editor-fold>
 
-// parseIntegerLiteral parses an integer-literal, and constructs
-// a leaf AST to represent it.
+  //<editor-fold defaultstate="collapsed" desc="Literals">
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // LITERALS
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+
+  // parseIntegerLiteral parses an integer-literal, and constructs
+  // a leaf AST to represent it.
 
   IntegerLiteral parseIntegerLiteral() throws SyntaxError {
     IntegerLiteral IL;
@@ -246,12 +253,14 @@ public class Parser {
     }
     return O;
   }
+  //</editor-fold>
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// COMMANDS
-//
-///////////////////////////////////////////////////////////////////////////////
+  //<editor-fold defaultstate="collapsed" desc="Commands">
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // COMMANDS
+  //
+  ///////////////////////////////////////////////////////////////////////////////
 
 // parseCommand parses the command, and constructs an AST
 // to represent its phrase structure.
@@ -412,12 +421,14 @@ public class Parser {
           }
     return commandAST;
   }
-  
-///////////////////////////////////////////////////////////////////////////////
-//
-// EXPRESSIONS
-//
-///////////////////////////////////////////////////////////////////////////////
+  //</editor-fold>
+
+  //<editor-fold defaultstate="collapsed" desc="Expressions">
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // EXPRESSIONS
+  //
+  ///////////////////////////////////////////////////////////////////////////////
 
   Expression parseExpression() throws SyntaxError {
     Expression expressionAST;
@@ -601,12 +612,14 @@ public class Parser {
     }
     return aggregateAST;
   }
+  //</editor-fold>
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// VALUE-OR-VARIABLE NAMES
-//
-///////////////////////////////////////////////////////////////////////////////
+  //<editor-fold defaultstate="collapsed" desc="Value or Variables">
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // VALUE-OR-VARIABLE NAMES
+  //
+  ///////////////////////////////////////////////////////////////////////////////
 
   Vname parseVname () throws SyntaxError {
     Vname vnameAST;
@@ -637,12 +650,14 @@ public class Parser {
     }
     return vAST;
   }
+  //</editor-fold>
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// DECLARATIONS
-//
-///////////////////////////////////////////////////////////////////////////////
+  //<editor-fold defaultstate="collapsed" desc="Declarations">
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // DECLARATIONS
+  //
+  ///////////////////////////////////////////////////////////////////////////////
 
   //New rule created for Compound-Declaration.
   Declaration parseCompoundDeclaration() throws SyntaxError{
@@ -871,12 +886,14 @@ public class Parser {
     }
     return declarationAST;
   }
+  //</editor-fold>
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// PARAMETERS
-//
-///////////////////////////////////////////////////////////////////////////////
+  //<editor-fold defaultstate="collapsed" desc="Parameters">
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // PARAMETERS
+  //
+  ///////////////////////////////////////////////////////////////////////////////
 
   FormalParameterSequence parseFormalParameterSequence() throws SyntaxError {
     FormalParameterSequence formalsAST;
@@ -1076,11 +1093,15 @@ public class Parser {
     return actualAST;
   }
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// TYPE-DENOTERS
-//
-///////////////////////////////////////////////////////////////////////////////
+  //</editor-fold>
+
+  //<editor-fold defaultstate="collapsed" desc="Type Denoters">
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // TYPE-DENOTERS
+  //
+  ///////////////////////////////////////////////////////////////////////////////
 
   TypeDenoter parseTypeDenoter() throws SyntaxError {
     TypeDenoter typeAST = null; // in case there's a syntactic error
@@ -1148,4 +1169,7 @@ public class Parser {
     }
     return fieldAST;
   }
+
+  //</editor-fold>
 }
+
