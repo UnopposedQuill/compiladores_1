@@ -1,13 +1,13 @@
 let
 	var x:Integer
 in
-	x:=0;
-	loop while
-		x<5
+	x:=5;
+	loop until
+		x<=0
 	do
 		putint(x);
 		puteol();
-		x:=x+1
+		x:=x-1
 	
 	repeat
 end

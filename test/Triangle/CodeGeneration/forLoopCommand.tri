@@ -1,10 +1,6 @@
-let
-	var x:Integer
-in
-	loop for
-	x ~ 0 to 5 
+loop for
+	x ~ 0 to 5
 	do
 	putint(x);
 	puteol()
-	repeat
-end
+repeat

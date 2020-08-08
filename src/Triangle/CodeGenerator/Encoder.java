@@ -97,7 +97,7 @@ public final class Encoder implements Visitor {
     ast.InitialDeclaration.entity = new UnknownValue(initialExpressionSize, frame.level, frame.size);
     frame = new Frame(frame, initialExpressionSize);// Modify the frame
     
-    // I need to keep on these addreses
+    // I need to keep on these addresses
     int jumpAddr, loopAddr;
     jumpAddr = nextInstrAddr;
     emit(Machine.JUMPop, 0, Machine.SBr, 0);
@@ -133,7 +133,7 @@ public final class Encoder implements Visitor {
     ast.C.visit(this, frame);
     patchD(jumpAddr, nextInstrAddr);
     ast.E.visit(this, frame);
-    emit(Machine.JUMPIFop, 1, Machine.CBr, loopAddr);
+    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
     return null;
   }
 
@@ -144,7 +144,7 @@ public final class Encoder implements Visitor {
     loopAddr = nextInstrAddr;
     ast.C.visit(this, frame);
     ast.E.visit(this, frame);
-    emit(Machine.JUMPIFop, 1, Machine.CBr, loopAddr);
+    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
     return null;
   }
 
@@ -159,7 +159,7 @@ public final class Encoder implements Visitor {
     ast.C.visit(this, frame);
     patchD(jumpAddr, nextInstrAddr);
     ast.E.visit(this, frame);
-    emit(Machine.JUMPIFop, 0, Machine.CBr, loopAddr);
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
     return null;
   }
 
@@ -170,7 +170,7 @@ public final class Encoder implements Visitor {
     loopAddr = nextInstrAddr;
     ast.C.visit(this, frame);
     ast.E.visit(this, frame);
-    emit(Machine.JUMPIFop, 0, Machine.CBr, loopAddr);
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
     return null;
   }
   //</editor-fold>
@@ -434,9 +434,7 @@ public final class Encoder implements Visitor {
     nextInstrAddr = currentInstrAddress;
 
     //Second pass. Emits the actual instructions by replacing the placeholders
-    Integer extraSize = (Integer) ast.D.visit(this, frame);
-
-    return extraSize;
+    return (Integer) ast.D.visit(this, frame);
   }
 
   @Override
