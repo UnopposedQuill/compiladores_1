@@ -23,7 +23,7 @@ public class LayoutVisitor implements Visitor {
   private final int BORDER = 5;
   private final int PARENT_SEP = 30;
 
-  private FontMetrics fontMetrics;
+  private final FontMetrics fontMetrics;
 
   public LayoutVisitor (FontMetrics fontMetrics) {
     this.fontMetrics = fontMetrics;
@@ -66,22 +66,22 @@ public class LayoutVisitor implements Visitor {
   }
 
   @Override
-  public Object visitWhileLoopCommand(LoopCommand ast, Object o) {
+  public Object visitWhileLoopCommand(WhileLoopCommand ast, Object o) {
     return layoutBinary("WhileLoopCom.", ast.E, ast.C);
   }
 
   @Override
-  public Object visitDoWhileLoopCommand(LoopCommand ast, Object o) {
+  public Object visitDoWhileLoopCommand(DoWhileLoopCommand ast, Object o) {
     return layoutBinary("DoWhileLoopCom.", ast.E, ast.C);
   }
 
   @Override
-  public Object visitUntilLoopCommand(LoopCommand ast, Object o) {
+  public Object visitUntilLoopCommand(UntilLoopCommand ast, Object o) {
     return layoutBinary("UntilLoopCom.", ast.E, ast.C);
   }
 
   @Override
-  public Object visitDoUntilLoopCommand(LoopCommand ast, Object o) {
+  public Object visitDoUntilLoopCommand(DoUntilLoopCommand ast, Object o) {
     return layoutBinary("DoUntilLoopCom.", ast.E, ast.C);
   }
   //</editor-fold>

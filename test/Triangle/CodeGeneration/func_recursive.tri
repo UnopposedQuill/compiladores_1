@@ -1,22 +1,15 @@
 let
     recursive
-
-    func X() : Integer ~ 1 + 2
-
+		func X() : Integer ~ 1 + 2
     and
-
-    func  P() : Char ~ Q()
-
+	    func P() : Char ~ Q()
     and
-
-    func Q() : Char~ 'a'
-    
-   end;
-
-   var a : Char
+	    func Q() : Char ~ 'a'
+    end;
+	var a : Char
 in
     a := P();
-    put(a);
+    put(a);puteol();
     putint(X())
 
 end

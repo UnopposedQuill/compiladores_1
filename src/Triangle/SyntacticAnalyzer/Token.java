@@ -15,7 +15,7 @@
 package Triangle.SyntacticAnalyzer;
 
 
-final class Token extends Object {
+public final class Token {
 
   protected int kind;
   protected String spelling;
@@ -24,23 +24,23 @@ final class Token extends Object {
   public Token(int kind, String spelling, SourcePosition position) {
 
     if (kind == Token.IDENTIFIER) {
-      int currentKind = firstReservedWord;
-      boolean searching = true;
+        int currentKind = firstReservedWord;
+        boolean searching = true;
 
-      while (searching) {
-        int comparison = tokenTable[currentKind].compareTo(spelling);
-        if (comparison == 0) {
-          this.kind = currentKind;
-          searching = false;
-        } else if (comparison > 0 || currentKind == lastReservedWord) {
-          this.kind = Token.IDENTIFIER;
-          searching = false;
-        } else {
-          currentKind ++;
+        while (searching) {
+            int comparison = tokenTable[currentKind].compareTo(spelling);
+            if (comparison == 0) {
+                this.kind = currentKind;
+                searching = false;
+            } else if (comparison > 0 || currentKind == lastReservedWord) {
+                this.kind = Token.IDENTIFIER;
+                searching = false;
+            } else {
+                currentKind ++;
+            }
         }
-      }
     } else
-      this.kind = kind;
+        this.kind = kind;
 
     this.spelling = spelling;
     this.position = position;
@@ -51,13 +51,13 @@ final class Token extends Object {
     return tokenTable[kind];
   }
 
+  @Override
   public String toString() {
     return "Kind=" + kind + ", spelling=" + spelling +
       ", position=" + position;
   }
 
   // Token classes...
-
   public static final int
 
     // literals, identifiers, operators...
@@ -114,7 +114,7 @@ final class Token extends Object {
     EOT			= 42,
     ERROR		= 43;
 
-  private static String[] tokenTable = new String[] {
+  private static final String[] tokenTable = new String[] {
     "<int>",
     "<char>",
     "<identifier>",

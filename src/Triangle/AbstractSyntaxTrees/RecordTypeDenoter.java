@@ -11,30 +11,40 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
+import java.util.Objects;
 
 public class RecordTypeDenoter extends TypeDenoter {
 
-  public RecordTypeDenoter (FieldTypeDenoter ftAST, SourcePosition thePosition) {
-    super (thePosition);
-    FT = ftAST;
-  }
+    public RecordTypeDenoter(FieldTypeDenoter ftAST, SourcePosition thePosition) {
+        super(thePosition);
+        FT = ftAST;
+    }
 
-  public Object visit (Visitor v, Object o) {
-    return v.visitRecordTypeDenoter(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitRecordTypeDenoter(this, o);
+    }
 
-  public boolean equals (Object obj) {
-    if (obj != null && obj instanceof ErrorTypeDenoter)
-      return true;
-    else if (obj != null && obj instanceof RecordTypeDenoter)
-      return this.FT.equals(((RecordTypeDenoter) obj).FT);
-    else
-      return false;
-  }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof ErrorTypeDenoter) {
+            return true;
+        } else if (obj != null && obj instanceof RecordTypeDenoter) {
+            return this.FT.equals(((RecordTypeDenoter) obj).FT);
+        } else {
+            return false;
+        }
+    }
 
-  public FieldTypeDenoter FT;
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.FT);
+        return hash;
+    }
+
+    public FieldTypeDenoter FT;
 }

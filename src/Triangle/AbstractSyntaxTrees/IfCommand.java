@@ -11,25 +11,25 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class IfCommand extends Command {
 
-  public IfCommand (Expression eAST, Command c1AST, Command c2AST,
-                    SourcePosition thePosition) {
-    super (thePosition);
-    E = eAST;
-    C1 = c1AST;
-    C2 = c2AST;
-  }
+    public IfCommand(Expression eAST, Command c1AST, Command c2AST,
+            SourcePosition thePosition) {
+        super(thePosition);
+        E = eAST;
+        C1 = c1AST;
+        C2 = c2AST;
+    }
 
-  public Object visit(Visitor v, Object o) {
-    return v.visitIfCommand(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitIfCommand(this, o);
+    }
 
-  public Expression E;
-  public Command C1, C2;
+    public Expression E;
+    public Command C1, C2;
 }

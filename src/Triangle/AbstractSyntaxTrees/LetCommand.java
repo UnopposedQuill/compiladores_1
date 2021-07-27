@@ -24,6 +24,7 @@ public class LetCommand extends Command {
     C = cAST;
   }
 
+  @Override
   public Object visit(Visitor v, Object o) {
     return v.visitLetCommand(this, o);
   }

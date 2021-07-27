@@ -6,13 +6,12 @@ import Triangle.AbstractSyntaxTrees.Visitor;
 
 public class PendingCallCommand extends PendingCall {
 
-    private CallCommand callCommand;
+    private final CallCommand callCommand;
 
     public PendingCallCommand(IdentificationTable callContextIdTable, CallCommand callCommand) {
         super(callContextIdTable);
         this.callCommand = callCommand;
     }
-
 
     @Override
     public void visitPendingCall(Visitor v, Object o) {

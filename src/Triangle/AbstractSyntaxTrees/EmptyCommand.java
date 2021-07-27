@@ -11,19 +11,18 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class EmptyCommand extends Command {
 
-  public EmptyCommand (SourcePosition thePosition) {
-    super (thePosition);
-  }
+    public EmptyCommand(SourcePosition thePosition) {
+        super(thePosition);
+    }
 
-  @Override
-  public Object visit(Visitor v, Object o) {
-    return v.visitEmptyCommand(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitEmptyCommand(this, o);
+    }
 }

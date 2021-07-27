@@ -11,25 +11,34 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
+import java.util.Objects;
 
 public class SimpleTypeDenoter extends TypeDenoter {
 
-  public SimpleTypeDenoter (Identifier iAST, SourcePosition thePosition) {
-    super (thePosition);
-    I = iAST;
-  }
+    public SimpleTypeDenoter(Identifier iAST, SourcePosition thePosition) {
+        super(thePosition);
+        I = iAST;
+    }
 
-  public Object visit (Visitor v, Object o) {
-    return v.visitSimpleTypeDenoter(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitSimpleTypeDenoter(this, o);
+    }
 
-  public boolean equals (Object obj) {
-    return false; // should not happen
-  }
+    @Override
+    public boolean equals(Object obj) {
+        return false; // should not happen
+    }
 
-  public Identifier I;
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.I);
+        return hash;
+    }
+
+    public Identifier I;
 }

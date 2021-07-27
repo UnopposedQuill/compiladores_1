@@ -11,17 +11,18 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public abstract class TypeDenoter extends AST {
 
-  public TypeDenoter (SourcePosition thePosition) {
-    super (thePosition);
-  }
+    public TypeDenoter(SourcePosition thePosition) {
+        super(thePosition);
+    }
 
-  public abstract boolean equals(Object obj);
-
+    @Override
+    public abstract boolean equals(Object obj);
+    @Override
+    public abstract int hashCode();
 }

@@ -124,7 +124,7 @@ public final class Encoder implements Visitor {
   }
 
   @Override
-  public Object visitWhileLoopCommand(LoopCommand ast, Object o) {
+  public Object visitWhileLoopCommand(WhileLoopCommand ast, Object o) {
     Frame frame = (Frame) o;
     int jumpAddr, loopAddr;
     jumpAddr = nextInstrAddr;
@@ -138,7 +138,7 @@ public final class Encoder implements Visitor {
   }
 
   @Override
-  public Object visitDoWhileLoopCommand(LoopCommand ast, Object o) {
+  public Object visitDoWhileLoopCommand(DoWhileLoopCommand ast, Object o) {
     Frame frame = (Frame) o;
     int loopAddr;
     loopAddr = nextInstrAddr;
@@ -150,7 +150,7 @@ public final class Encoder implements Visitor {
 
 
   @Override
-  public Object visitUntilLoopCommand(LoopCommand ast, Object o) {
+  public Object visitUntilLoopCommand(UntilLoopCommand ast, Object o) {
     Frame frame = (Frame) o;
     int jumpAddr, loopAddr;
     jumpAddr = nextInstrAddr;
@@ -164,7 +164,7 @@ public final class Encoder implements Visitor {
   }
 
   @Override
-  public Object visitDoUntilLoopCommand(LoopCommand ast, Object o) {
+  public Object visitDoUntilLoopCommand(DoUntilLoopCommand ast, Object o) {
     Frame frame = (Frame) o;
     int loopAddr;
     loopAddr = nextInstrAddr;

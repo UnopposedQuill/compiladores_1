@@ -11,20 +11,19 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public abstract class Vname extends AST {
 
-  public Vname (SourcePosition thePosition) {
-    super (thePosition);
-    variable = false;
-    type = null;
-  }
+    public Vname(SourcePosition thePosition) {
+        super(thePosition);
+        variable = false;
+        type = null;
+    }
 
-  public boolean variable, indexed;
-  public int offset;
-  public TypeDenoter type;
+    public boolean variable, indexed;
+    public int offset;
+    public TypeDenoter type;
 }

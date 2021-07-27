@@ -1,5 +1,5 @@
-package Triangle.ProgramWriter;
 
+package Triangle.ProgramWriter;
 
 import java.io.File;
 import java.io.FileWriter;

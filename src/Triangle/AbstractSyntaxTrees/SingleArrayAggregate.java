@@ -11,22 +11,22 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class SingleArrayAggregate extends ArrayAggregate {
 
-  public SingleArrayAggregate (Expression eAST,
-                        SourcePosition thePosition) {
-    super (thePosition);
-    E = eAST;
-  }
+    public SingleArrayAggregate(Expression eAST,
+            SourcePosition thePosition) {
+        super(thePosition);
+        E = eAST;
+    }
 
-  public Object visit (Visitor v, Object o) {
-    return v.visitSingleArrayAggregate(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitSingleArrayAggregate(this, o);
+    }
 
-  public Expression E;
+    public Expression E;
 }

@@ -1,0 +1,21 @@
+!this program will print a list in standard output
+let
+	var list init [0, 1, 2, 3, 4, 5];
+	recursive
+		proc printlist(x: array 6 of Integer, position: Integer) ~
+			if position >= 0 then
+				putint(list[position]);puteol();
+				printlist(x, position-1)
+			else
+				skip
+			end
+		end
+	and
+		proc dummyProc() ~ 
+			skip
+		end
+	end
+in
+	printlist(list, 5)
+end
+

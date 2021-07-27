@@ -5,7 +5,6 @@
 
 package Triangle;
 import Triangle.SyntacticAnalyzer.SourcePosition;
-import Triangle.*;
 
 /**
  * Extends the Triangle.ErrorReporter class. Used to get the source lines
@@ -30,6 +29,7 @@ public class IDEReporter extends ErrorReporter {
      * @param tokenName Name of the token
      * @param pos Position in the source file.
      */
+    @Override
     public void reportError(String message, String tokenName, SourcePosition pos) {
         errorPositions[numErrors] = pos.start;
         super.reportError(message, tokenName, pos);        
@@ -45,6 +45,6 @@ public class IDEReporter extends ErrorReporter {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Attributes ">
-    private int errorPositions[] = new int[10];     // Array of error positions.
+    private final int errorPositions[] = new int[10];     // Array of error positions.
     // </editor-fold>
 }

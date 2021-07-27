@@ -11,21 +11,21 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class IntegerExpression extends Expression {
 
-  public IntegerExpression (IntegerLiteral ilAST, SourcePosition thePosition) {
-    super (thePosition);
-    IL = ilAST;
-  }
+    public IntegerExpression(IntegerLiteral ilAST, SourcePosition thePosition) {
+        super(thePosition);
+        IL = ilAST;
+    }
 
-  public Object visit(Visitor v, Object o) {
-    return v.visitIntegerExpression(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitIntegerExpression(this, o);
+    }
 
-  public IntegerLiteral IL;
+    public IntegerLiteral IL;
 }

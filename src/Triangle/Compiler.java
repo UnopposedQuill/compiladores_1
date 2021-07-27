@@ -17,8 +17,6 @@ package Triangle;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.CodeGenerator.Encoder;
 import Triangle.ContextualAnalyzer.Checker;
-import Triangle.ProgramWriter.HTMLWriter;
-import Triangle.ProgramWriter.XMLWriter;
 import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.SyntacticAnalyzer.Scanner;
 import Triangle.SyntacticAnalyzer.SourceFile;
@@ -71,11 +69,6 @@ public class Compiler {
         System.out.println("Syntactic Analysis ...");
         SourceFile source = new SourceFile(sourceName);
 
-        if (source == null) {
-            System.out.println("Can't access source file " + sourceName);
-            System.exit(1);
-        }
-
         scanner  = new Scanner(source);
         reporter = new ErrorReporter();
         parser   = new Parser(scanner, reporter);
@@ -116,9 +109,9 @@ public class Compiler {
      *
      * @param	args	the only command-line argument to the program specifies
      *                  the source filename.
+     * @return 
      */
     public static void main(String[] args) {
-        boolean compiledOK;
 
         if (args.length != 1) {
             System.out.println("Usage: tc filename");
@@ -126,6 +119,6 @@ public class Compiler {
         }
 
         String sourceName = args[0];
-        compiledOK = compileProgram(sourceName, objectName, false, false);
+        compileProgram(sourceName, objectName, false, false);
     }
 }

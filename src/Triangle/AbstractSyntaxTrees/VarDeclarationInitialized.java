@@ -9,6 +9,14 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class VarDeclarationInitialized extends VarDeclaration {
 
+    /**
+     * This will create a new instance for an Initialized Variable Declaration
+     * Notice that the type will be inferred according to the expression type,
+     * and then the variable will be bound to that type
+     * @param iAST The Identifier to bind the variable to
+     * @param eAST The initial expression (and hence the type) of the variable
+     * @param thePosition Where it is located in the source file
+     */
     public VarDeclarationInitialized (Identifier iAST, Expression eAST,
                                       SourcePosition thePosition) {
         super (iAST, null, thePosition);

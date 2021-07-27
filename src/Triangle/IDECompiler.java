@@ -5,9 +5,6 @@
 
 package Triangle;
 
-import Triangle.CodeGenerator.Frame;
-import java.awt.event.ActionListener;
-
 import Triangle.ProgramWriter.HTMLWriter;
 import Triangle.ProgramWriter.XMLWriter;
 import Triangle.SyntacticAnalyzer.SourceFile;
@@ -19,16 +16,19 @@ import Triangle.CodeGenerator.Encoder;
 import java.io.File;
 
 
-
 /** 
- * This is merely a reimplementation of the Triangle.Compiler class. We need
+ * This is merely a re-implementation of the Triangle.Compiler class. We need
  * to get to the ASTs in order to draw them in the IDE without modifying the
  * original Triangle code.
  *
- * @author Luis Leopoldo P�rez <luiperpe@ns.isi.ulatina.ac.cr>
+ * @author Luis Leopoldo Pérez <luiperpe@ns.isi.ulatina.ac.cr>
  */
 public class IDECompiler {
 
+    // <editor-fold defaultstate="collapsed" desc=" Attributes ">
+    private Program rootAST;        // The Root Abstract Syntax Tree.    
+    private IDEReporter report;     // Our ErrorReporter class.
+    // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" Methods ">
     /**
@@ -42,7 +42,7 @@ public class IDECompiler {
      * Particularly the same compileProgram method from the Triangle.Compiler
      * class.
      * @param sourceName Path to the source file.
-     * @return True if compilation was succesful.
+     * @return True if compilation was successful.
      */
     public boolean compileProgram(String sourceName) {
         System.out.println("********** " +
@@ -111,9 +111,4 @@ public class IDECompiler {
         //Write the output files
         xmlWriter.writeProgramAST(sourceName);
     }
-
-    // <editor-fold defaultstate="collapsed" desc=" Attributes ">
-    private Program rootAST;        // The Root Abstract Syntax Tree.    
-    private IDEReporter report;     // Our ErrorReporter class.
-    // </editor-fold>
 }

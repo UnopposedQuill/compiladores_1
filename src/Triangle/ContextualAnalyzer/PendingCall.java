@@ -4,11 +4,12 @@ import Triangle.AbstractSyntaxTrees.Identifier;
 import Triangle.AbstractSyntaxTrees.Visitor;
 
 public abstract class PendingCall {
-    private IdentificationTable callContextIdTable;
+    private final IdentificationTable callContextIdTable;
     private int level;
 
     public PendingCall(IdentificationTable callContextIdTable) {
-        setCallContextIdTable(callContextIdTable);
+        this.callContextIdTable = callContextIdTable;
+        //setCallContextIdTable(callContextIdTable);
         this.level = callContextIdTable.getLevel();
     }
 
@@ -20,16 +21,7 @@ public abstract class PendingCall {
         return callContextIdTable;
     }
 
-    public void setCallContextIdTable(IdentificationTable callContextIdTable) {
-        this.callContextIdTable = callContextIdTable;
-    }
-
-
     public int getLevel() {
         return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 }

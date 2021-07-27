@@ -1,0 +1,9 @@
+let
+	var x:Integer;
+	var y init 'c'
+in
+	if x = y
+	then put('a')
+	else put('b')
+	end
+end

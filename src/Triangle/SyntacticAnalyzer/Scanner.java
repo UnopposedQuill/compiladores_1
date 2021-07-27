@@ -55,9 +55,6 @@ public final class Scanner {
     writingHTML = false;
   }
 
-  public void enableDebugging() {
-    debug = true;
-  }
   public void htmlRun(HTMLWriter htmlWriter) {
     this.writingHTML = true;
     this.htmlWriter = htmlWriter;
@@ -81,37 +78,39 @@ public final class Scanner {
 
   private void scanSeparator() {
     switch (currentChar) {
-    case '!':
-      {
-        takeIt();
-        String comment = "!";
-        while ((currentChar != SourceFile.EOL) && (currentChar != SourceFile.CR) && (currentChar != SourceFile.EOT)) {
-          comment = comment + currentChar;
-          takeIt();
+        case '!' -> {
+            takeIt();
+            String comment = "!";
+            while ((currentChar != SourceFile.EOL) && (currentChar != SourceFile.CR) && (currentChar != SourceFile.EOT)) {
+              comment = comment + currentChar;
+              takeIt();
+            }
+            if (currentChar == SourceFile.CR) {
+              takeIt();
+            }
+            if (currentChar == SourceFile.EOL) {
+              takeIt();
+            }
+            if(writingHTML)
+              this.htmlWriter.writeComment(comment);
+            break;
         }
-        if (currentChar == SourceFile.CR) {
-          takeIt();
+        case '\n' -> {
+            if(writingHTML)
+                htmlWriter.writeElse("<br>\n");
+            takeIt();
+            break;
         }
-        if (currentChar == SourceFile.EOL) {
-          takeIt();
+        case '\r' -> {
+            takeIt();
+            break;
         }
-        if(writingHTML)
-          this.htmlWriter.writeComment(comment);
-      }
-      break;
-    case '\n':
-      if(writingHTML)
-        htmlWriter.writeElse("<br>\n");
-      takeIt();
-      break;
-    case '\r':
-      takeIt();
-      break;
-    case ' ': case '\t':
-      if(writingHTML)
-        htmlWriter.writeElse(String.valueOf(currentChar));
-      takeIt();
-      break;
+        case ' ', '\t' -> {
+            if(writingHTML)
+                htmlWriter.writeElse(String.valueOf(currentChar));
+            takeIt();
+            break;
+        }
     }
   }
 

@@ -11,17 +11,18 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public abstract class FormalParameter extends Declaration {
 
-  public FormalParameter (SourcePosition thePosition) {
-    super (thePosition);
-  }
+    public FormalParameter(SourcePosition thePosition) {
+        super(thePosition);
+    }
 
-  public abstract boolean equals (Object fpAST);
-
+    @Override
+    public abstract boolean equals(Object fpAST);
+    @Override
+    public abstract int hashCode();
 }

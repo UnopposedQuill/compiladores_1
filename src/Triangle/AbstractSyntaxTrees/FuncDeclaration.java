@@ -28,6 +28,7 @@ public class FuncDeclaration extends Declaration {
     E = eAST;
   }
 
+  @Override
   public Object visit (Visitor v, Object o) {
     return v.visitFuncDeclaration(this, o);
   }

@@ -28,10 +28,10 @@ public class ErrorReporter {
     System.out.print ("ERROR: ");
 
     for (int p = 0; p < message.length(); p++)
-    if (message.charAt(p) == '%')
-      System.out.print(tokenName);
-    else
-      System.out.print(message.charAt(p));
+        if (message.charAt(p) == '%')
+            System.out.print(tokenName);
+        else
+            System.out.print(message.charAt(p));
     System.out.println(" " + pos.start + ".." + pos.finish);
     numErrors++;
   }

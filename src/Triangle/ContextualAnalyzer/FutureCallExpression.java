@@ -4,8 +4,8 @@ import Triangle.AbstractSyntaxTrees.Expression;
 import Triangle.AbstractSyntaxTrees.TypeDenoter;
 
 public class FutureCallExpression {
-    private TypeDenoter typeDenoterToCheck;
-    private Expression E;
+    private final TypeDenoter typeDenoterToCheck;
+    private final Expression E;
 
     /**
      * Constructor for a call expression with a future declaration
@@ -21,15 +21,7 @@ public class FutureCallExpression {
         return typeDenoterToCheck;
     }
 
-    public void setTypeDenoterToCheck(TypeDenoter typeDenoterToCheck) {
-        this.typeDenoterToCheck = typeDenoterToCheck;
-    }
-
     public Expression getE() {
         return E;
-    }
-
-    public void setE(Expression e) {
-        E = e;
     }
 }

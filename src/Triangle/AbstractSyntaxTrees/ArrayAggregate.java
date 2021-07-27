@@ -11,17 +11,16 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public abstract class ArrayAggregate extends AST {
 
-  public ArrayAggregate (SourcePosition thePosition) {
-    super (thePosition);
-    elemCount = 0;
-  }
+    public ArrayAggregate(SourcePosition thePosition) {
+        super(thePosition);
+        elemCount = 0;
+    }
 
-  public int elemCount;
+    public int elemCount;
 }

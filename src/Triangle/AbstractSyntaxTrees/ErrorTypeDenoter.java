@@ -22,11 +22,19 @@ public class ErrorTypeDenoter extends TypeDenoter {
     super (thePosition);
   }
 
+  @Override
   public Object visit (Visitor v, Object o) {
     return v.visitErrorTypeDenoter(this, o);
   }
 
+  @Override
   public boolean equals (Object obj) {
-    return true;
+    return obj instanceof TypeDenoter;
   }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
 }

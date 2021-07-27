@@ -11,24 +11,24 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class UnaryExpression extends Expression {
 
-  public UnaryExpression (Operator oAST, Expression eAST,
-                          SourcePosition thePosition) {
-    super (thePosition);
-    O = oAST;
-    E = eAST;
-  }
+    public UnaryExpression(Operator oAST, Expression eAST,
+            SourcePosition thePosition) {
+        super(thePosition);
+        O = oAST;
+        E = eAST;
+    }
 
-  public Object visit(Visitor v, Object o) {
-    return v.visitUnaryExpression(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitUnaryExpression(this, o);
+    }
 
-  public Expression E;
-  public Operator O;
+    public Expression E;
+    public Operator O;
 }

@@ -1,0 +1,5 @@
+let
+	var x:Integer
+in
+	x := 2 \ 1
+end

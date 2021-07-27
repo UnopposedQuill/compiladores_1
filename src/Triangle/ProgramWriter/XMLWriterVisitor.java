@@ -13,6 +13,24 @@ public class XMLWriterVisitor implements Visitor {
         this.fileWriter = fileWriter;
     }
     
+    // <editor-fold defaultstate="collapsed" desc=" Programs ">
+    ///////////////////////////////////////////////////////////////////////////////
+    //
+    // PROGRAMS
+    //
+    ///////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public Object visitProgram(Program ast, Object o) {
+      writeToXMLFile("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
+      writeToXMLFile("<Program>\n");
+        ast.C.visit(this, null);
+      writeToXMLFile("</Program>\n");
+      return null;
+    }
+
+    // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc=" Commands ">
     ///////////////////////////////////////////////////////////////////////////////
     //
@@ -40,7 +58,7 @@ public class XMLWriterVisitor implements Visitor {
 
     @Override
     public Object visitEmptyCommand(EmptyCommand ast, Object o) {
-      writeToXMLFile("<EmptyCommand/>\n");      
+      writeToXMLFile("<EmptyCommand/>\n");
       return null;
     }
 
@@ -73,7 +91,7 @@ public class XMLWriterVisitor implements Visitor {
     }
 
     @Override
-    public Object visitWhileLoopCommand(LoopCommand ast, Object o) {
+    public Object visitWhileLoopCommand(WhileLoopCommand ast, Object o) {
       writeToXMLFile("<WhileLoopCommand>\n");
         ast.E.visit(this, null);
         ast.C.visit(this, null);
@@ -82,7 +100,7 @@ public class XMLWriterVisitor implements Visitor {
     }
 
     @Override
-    public Object visitDoWhileLoopCommand(LoopCommand ast, Object o) {
+    public Object visitDoWhileLoopCommand(DoWhileLoopCommand ast, Object o) {
       writeToXMLFile("<Do-WhileLoopCommand>\n");
         ast.E.visit(this, null);
         ast.C.visit(this, null);
@@ -91,7 +109,7 @@ public class XMLWriterVisitor implements Visitor {
     }
 
     @Override
-    public Object visitUntilLoopCommand(LoopCommand ast, Object o) {
+    public Object visitUntilLoopCommand(UntilLoopCommand ast, Object o) {
       writeToXMLFile("<UntilLoopCommand>\n");
         ast.E.visit(this, null);
         ast.C.visit(this, null);
@@ -100,7 +118,7 @@ public class XMLWriterVisitor implements Visitor {
     }
 
     @Override
-    public Object visitDoUntilLoopCommand(LoopCommand ast, Object o) {
+    public Object visitDoUntilLoopCommand(DoUntilLoopCommand ast, Object o) {
       writeToXMLFile("<Do-UntilLoopCommand>\n");
         ast.E.visit(this, null);
         ast.C.visit(this, null);
@@ -650,24 +668,6 @@ public class XMLWriterVisitor implements Visitor {
         ast.V.visit(this, null);
         ast.E.visit(this, null);
       writeToXMLFile("</SubscriptVname>\n");
-      return null;
-    }
-
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc=" Programs ">
-    ///////////////////////////////////////////////////////////////////////////////
-    //
-    // PROGRAMS
-    //
-    ///////////////////////////////////////////////////////////////////////////////
-
-    @Override
-    public Object visitProgram(Program ast, Object o) {
-      writeToXMLFile("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
-      writeToXMLFile("<Program>\n");
-        ast.C.visit(this, null);
-      writeToXMLFile("</Program>\n");
       return null;
     }
 

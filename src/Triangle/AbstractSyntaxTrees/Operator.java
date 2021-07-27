@@ -11,21 +11,21 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class Operator extends Terminal {
 
-  public Operator (String theSpelling, SourcePosition thePosition) {
-    super (theSpelling, thePosition);
-    decl = null;
-  }
+    public Operator(String theSpelling, SourcePosition thePosition) {
+        super(theSpelling, thePosition);
+        decl = null;
+    }
 
-  public Object visit(Visitor v, Object o) {
-    return v.visitOperator(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitOperator(this, o);
+    }
 
-  public Declaration decl;
+    public Declaration decl;
 }

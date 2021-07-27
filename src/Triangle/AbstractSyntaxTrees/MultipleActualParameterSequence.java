@@ -11,24 +11,23 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class MultipleActualParameterSequence extends ActualParameterSequence {
 
-  public MultipleActualParameterSequence (ActualParameter apAST, ActualParameterSequence apsAST,
-                                   SourcePosition thePosition) {
-    super (thePosition);
-    AP = apAST;
-    APS = apsAST;
-  }
+    public MultipleActualParameterSequence(ActualParameter apAST, ActualParameterSequence apsAST,
+            SourcePosition thePosition) {
+        super(thePosition);
+        AP = apAST;
+        APS = apsAST;
+    }
 
-  public Object visit(Visitor v, Object o) {
-    return v.visitMultipleActualParameterSequence(this, o);
-  }
+    public Object visit(Visitor v, Object o) {
+        return v.visitMultipleActualParameterSequence(this, o);
+    }
 
-  public ActualParameter AP;
-  public ActualParameterSequence APS;
+    public ActualParameter AP;
+    public ActualParameterSequence APS;
 }

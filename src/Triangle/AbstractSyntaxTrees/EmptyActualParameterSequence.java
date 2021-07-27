@@ -22,6 +22,7 @@ public class EmptyActualParameterSequence extends ActualParameterSequence {
     super (thePosition);
   }
 
+  @Override
   public Object visit(Visitor v, Object o) {
     return v.visitEmptyActualParameterSequence(this, o);
   }

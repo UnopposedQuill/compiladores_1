@@ -11,17 +11,16 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public abstract class Expression extends AST {
 
-  public Expression (SourcePosition thePosition) {
-    super (thePosition);
-    type = null;
-  }
+    public Expression(SourcePosition thePosition) {
+        super(thePosition);
+        type = null;
+    }
 
-  public TypeDenoter type;
+    public TypeDenoter type;
 }

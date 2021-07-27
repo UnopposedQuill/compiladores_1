@@ -11,32 +11,43 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
+import java.util.Objects;
 
 public class VarFormalParameter extends FormalParameter {
 
-  public VarFormalParameter (Identifier iAST, TypeDenoter tAST,
-                        SourcePosition thePosition) {
-    super (thePosition);
-    I = iAST;
-    T = tAST;
-  }
+    public VarFormalParameter(Identifier iAST, TypeDenoter tAST,
+            SourcePosition thePosition) {
+        super(thePosition);
+        I = iAST;
+        T = tAST;
+    }
 
-  public Object visit(Visitor v, Object o) {
-    return v.visitVarFormalParameter(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitVarFormalParameter(this, o);
+    }
 
-  public Identifier I;
-  public TypeDenoter T;
+    @Override
+    public boolean equals(Object fpAST) {
+        if (fpAST instanceof VarFormalParameter) {
+            VarFormalParameter vfpAST = (VarFormalParameter) fpAST;
+            return T.equals(vfpAST.T);
+        } else {
+            return false;
+        }
+    }
 
-  public boolean equals (Object fpAST) {
-  	if (fpAST instanceof VarFormalParameter) {
-  	  VarFormalParameter vfpAST = (VarFormalParameter) fpAST;
-  	  return T.equals(vfpAST.T);
-  	} else
-  	  return false;
-  }
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.I);
+        hash = 37 * hash + Objects.hashCode(this.T);
+        return hash;
+    }
+
+    public Identifier I;
+    public TypeDenoter T;
 }

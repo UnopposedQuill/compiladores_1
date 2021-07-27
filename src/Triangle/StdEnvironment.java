@@ -11,7 +11,6 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle;
 
 import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
@@ -24,31 +23,28 @@ import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 
 public final class StdEnvironment {
 
-  // These are small ASTs representing standard types.
+    // These are small ASTs representing standard types.
+    public static TypeDenoter
+        booleanType, charType, integerType, anyType, errorType;
 
-  public static TypeDenoter
-    booleanType, charType, integerType, anyType, errorType;
+    public static TypeDeclaration
+        booleanDecl, charDecl, integerDecl;
 
-  public static TypeDeclaration
-    booleanDecl, charDecl, integerDecl;
+    // These are small ASTs representing "declarations" of standard entities.
+    public static ConstDeclaration
+        falseDecl, trueDecl, maxintDecl;
 
-  // These are small ASTs representing "declarations" of standard entities.
+    public static UnaryOperatorDeclaration
+        notDecl, negDecl;
 
-  public static ConstDeclaration
-    falseDecl, trueDecl, maxintDecl;
+    public static BinaryOperatorDeclaration
+        andDecl, orDecl, addDecl, subtractDecl, multiplyDecl, divideDecl, moduloDecl,
+        equalDecl, unequalDecl, lessDecl, notlessDecl, greaterDecl, notgreaterDecl;
 
-  public static UnaryOperatorDeclaration
-    notDecl, negDecl;
+    public static ProcDeclaration
+        getDecl, putDecl, getintDecl, putintDecl, geteolDecl, puteolDecl, indexCheck;
 
-  public static BinaryOperatorDeclaration
-    andDecl, orDecl,
-    addDecl, subtractDecl, multiplyDecl, divideDecl, moduloDecl,
-    equalDecl, unequalDecl, lessDecl, notlessDecl, greaterDecl, notgreaterDecl;
-
-  public static ProcDeclaration
-    getDecl, putDecl, getintDecl, putintDecl, geteolDecl, puteolDecl, indexCheck;
-
-  public static FuncDeclaration
-    chrDecl, ordDecl, eolDecl, eofDecl;
+    public static FuncDeclaration
+        chrDecl, ordDecl, eolDecl, eofDecl;
 
 }

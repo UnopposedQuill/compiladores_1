@@ -11,24 +11,24 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class ConstDeclaration extends Declaration {
 
-  public ConstDeclaration (Identifier iAST, Expression eAST,
-                    SourcePosition thePosition) {
-    super (thePosition);
-    I = iAST;
-    E = eAST;
-  }
+    public ConstDeclaration(Identifier iAST, Expression eAST,
+            SourcePosition thePosition) {
+        super(thePosition);
+        I = iAST;
+        E = eAST;
+    }
 
-  public Object visit(Visitor v, Object o) {
-    return v.visitConstDeclaration(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitConstDeclaration(this, o);
+    }
 
-  public Identifier I;
-  public Expression E;
+    public Identifier I;
+    public Expression E;
 }

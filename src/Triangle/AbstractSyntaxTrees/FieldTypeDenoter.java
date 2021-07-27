@@ -11,16 +11,19 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public abstract class FieldTypeDenoter extends TypeDenoter {
 
-  public FieldTypeDenoter(SourcePosition thePosition) {
-    super (thePosition);
-  }
+    public FieldTypeDenoter(SourcePosition thePosition) {
+        super(thePosition);
+    }
 
-  public abstract boolean equals (Object obj);
+    @Override
+    public abstract boolean equals(Object obj);
+
+    @Override
+    public abstract int hashCode();
 }

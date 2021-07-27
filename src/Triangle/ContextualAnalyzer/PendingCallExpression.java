@@ -6,7 +6,7 @@ import Triangle.AbstractSyntaxTrees.Visitor;
 
 public class PendingCallExpression extends PendingCall{
 
-    private CallExpression callExpression;
+    private final CallExpression callExpression;
 
     public PendingCallExpression(IdentificationTable callContextIdTable, CallExpression callExpression) {
         super(callContextIdTable);

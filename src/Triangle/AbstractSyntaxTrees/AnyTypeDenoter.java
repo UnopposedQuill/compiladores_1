@@ -11,22 +11,36 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class AnyTypeDenoter extends TypeDenoter {
 
-  public AnyTypeDenoter (SourcePosition thePosition) {
-    super (thePosition);
-  }
+    public AnyTypeDenoter(SourcePosition thePosition) {
+        super(thePosition);
+    }
 
-  public Object visit(Visitor v, Object o) {
-    return v.visitAnyTypeDenoter(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitAnyTypeDenoter(this, o);
+    }
 
-  public boolean equals (Object obj) {
-    return false;
-  }
+    /**
+     * Since this is a control class, we need it to return different when
+     * comparing it to anything.
+     *
+     * @param obj The object it will be compared to.
+     * @return False in every scenario.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
 }

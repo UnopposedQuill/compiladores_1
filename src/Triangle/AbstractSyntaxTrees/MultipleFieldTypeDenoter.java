@@ -15,6 +15,7 @@
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
+import java.util.Objects;
 
 public class MultipleFieldTypeDenoter extends FieldTypeDenoter {
 
@@ -26,19 +27,30 @@ public class MultipleFieldTypeDenoter extends FieldTypeDenoter {
     FT = ftAST;
   }
 
+  @Override
   public Object visit (Visitor v, Object o) {
     return v.visitMultipleFieldTypeDenoter(this, o);
   }
 
+  @Override
   public boolean equals (Object obj) {
     if (obj != null && obj instanceof MultipleFieldTypeDenoter) {
       MultipleFieldTypeDenoter ft = (MultipleFieldTypeDenoter) obj;
-      return (this.I.spelling.compareTo(ft.I.spelling) == 0) &&
-              this.T.equals(ft.T) &&
-              this.FT.equals(ft.FT);
+      return this.I.spelling.equals(ft.I.spelling) &&
+             this.T.equals(ft.T) &&
+             this.FT.equals(ft.FT);
     } else
       return false;
   }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 83 * hash + Objects.hashCode(this.I);
+        hash = 83 * hash + Objects.hashCode(this.T);
+        hash = 83 * hash + Objects.hashCode(this.FT);
+        return hash;
+    }
 
   public Identifier I;
   public TypeDenoter T;

@@ -24,6 +24,7 @@ public class DotVname extends Vname {
     I = iAST;
   }
 
+  @Override
   public Object visit (Visitor v, Object o) {
     return v.visitDotVname(this, o);
   }

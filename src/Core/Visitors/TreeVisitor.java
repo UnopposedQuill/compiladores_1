@@ -62,22 +62,22 @@ public class TreeVisitor implements Visitor {
     }
 
     @Override
-    public Object visitWhileLoopCommand(LoopCommand ast, Object o) {
+    public Object visitWhileLoopCommand(WhileLoopCommand ast, Object o) {
         return(createBinary("WhileLoop Command",ast.E, ast.C));
     }
 
     @Override
-    public Object visitDoWhileLoopCommand(LoopCommand ast, Object o) {
+    public Object visitDoWhileLoopCommand(DoWhileLoopCommand ast, Object o) {
         return(createBinary("DoWhileLoop Command",ast.E, ast.C));
     }
 
     @Override
-    public Object visitUntilLoopCommand(LoopCommand ast, Object o) {
+    public Object visitUntilLoopCommand(UntilLoopCommand ast, Object o) {
         return(createBinary("UntilLoop Command",ast.E, ast.C));
     }
 
     @Override
-    public Object visitDoUntilLoopCommand(LoopCommand ast, Object o) {
+    public Object visitDoUntilLoopCommand(DoUntilLoopCommand ast, Object o) {
         return(createBinary("DoUntilLoop Command",ast.E, ast.C));
     }
     // </editor-fold>

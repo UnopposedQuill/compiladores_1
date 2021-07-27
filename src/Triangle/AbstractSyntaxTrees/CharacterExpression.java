@@ -23,6 +23,7 @@ public class CharacterExpression extends Expression {
     CL = clAST;
   }
 
+  @Override
   public Object visit(Visitor v, Object o) {
     return v.visitCharacterExpression(this, o);
   }

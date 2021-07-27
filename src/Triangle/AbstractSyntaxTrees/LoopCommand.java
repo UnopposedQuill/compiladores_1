@@ -30,9 +30,6 @@ public abstract class LoopCommand extends Command {
     C = cAST;
   }
 
-  @Override
-  public abstract Object visit(Visitor v, Object o);
-
   public Expression E;
   public Command C;
 }

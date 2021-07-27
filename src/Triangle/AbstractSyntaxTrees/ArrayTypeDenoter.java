@@ -11,34 +11,45 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
+import java.util.Objects;
 
 public class ArrayTypeDenoter extends TypeDenoter {
 
-  public ArrayTypeDenoter (IntegerLiteral ilAST, TypeDenoter tAST,
-                    SourcePosition thePosition) {
-    super (thePosition);
-    IL = ilAST;
-    T = tAST;
-  }
+    public ArrayTypeDenoter(IntegerLiteral ilAST, TypeDenoter tAST,
+            SourcePosition thePosition) {
+        super(thePosition);
+        IL = ilAST;
+        T = tAST;
+    }
 
-  public Object visit(Visitor v, Object o) {
-    return v.visitArrayTypeDenoter(this, o);
-  }
+    @Override
+    public Object visit(Visitor v, Object o) {
+        return v.visitArrayTypeDenoter(this, o);
+    }
 
-  public boolean equals (Object obj) {
-    if (obj != null && obj instanceof ErrorTypeDenoter)
-      return true;
-    else if (obj != null && obj instanceof ArrayTypeDenoter)
-      return this.IL.spelling.compareTo(((ArrayTypeDenoter) obj).IL.spelling) == 0 &&
-             this.T.equals(((ArrayTypeDenoter) obj).T);
-    else
-      return false;
-  }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof ErrorTypeDenoter) {
+            return true;
+        } else if (obj != null && obj instanceof ArrayTypeDenoter) {
+            return this.IL.spelling.compareTo(((ArrayTypeDenoter) obj).IL.spelling) == 0
+                    && this.T.equals(((ArrayTypeDenoter) obj).T);
+        } else {
+            return false;
+        }
+    }
 
-  public IntegerLiteral IL;
-  public TypeDenoter T;
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.IL);
+        hash = 67 * hash + Objects.hashCode(this.T);
+        return hash;
+    }
+
+    public IntegerLiteral IL;
+    public TypeDenoter T;
 }

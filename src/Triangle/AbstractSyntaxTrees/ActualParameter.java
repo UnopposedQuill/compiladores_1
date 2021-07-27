@@ -11,14 +11,13 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public abstract class ActualParameter extends AST {
 
-  public ActualParameter (SourcePosition thePosition) {
-    super (thePosition);
-  }
+    public ActualParameter(SourcePosition thePosition) {
+        super(thePosition);
+    }
 }

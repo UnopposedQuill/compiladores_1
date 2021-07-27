@@ -2,10 +2,12 @@ package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
-public class RecursiveDeclaration extends Declaration{
+public class RecursiveDeclaration extends Declaration {
+
     public Declaration D;
+
     public RecursiveDeclaration(Declaration D, SourcePosition thePosition) {
-        super (thePosition);
+        super(thePosition);
         this.D = D;
     }
 
